@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ugtech</title>
+<meta name="color-scheme" content="light">
+<meta name="description" content="An open, searchable directory of technology companies in Uganda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet">
+<style>
+  /* Layout and visual language modelled on the Mkdirs directory template (demo.mkdirs.com, Apache-2.0). */
+  :root {
+    --bg: #ffffff; --surface: #ffffff; --ink: #0a0a0a; --muted: #6b7280; --line: #e5e7eb; --chip-line: #e5e7eb;
+    --primary: #a16207; --primary-ink: #ffffff; --grad-a: #7a5800; --grad-b: #b8860b;
+    --featured-bg: #fffbf5; --featured-line: #fdba74; --hover: #f9fafb;
+    --radius: 8px; --shadow: 0 1px 2px rgba(0,0,0,.04);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.6 "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  a { color: inherit; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 768px) { .container { padding: 0 32px; } }
+
+  /* header */
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent);
+           backdrop-filter: blur(10px); }
+  .nav { display: flex; align-items: center; gap: 32px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; text-decoration: none; white-space: nowrap; }
+  @media (max-width: 520px) { .nav { gap: 12px; } }
+  .brand .wordmark { font-size: 17px; }
+  .brand .ug { color: var(--primary); }
+  .logo { width: 32px; height: 32px; border-radius: 8px; background: #0a0a0a; color: #fff; display: grid;
+          place-items: center; font-size: 14px; font-weight: 700; position: relative; overflow: hidden; }
+  .logo::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5px;
+                 background: linear-gradient(90deg, #000 33%, #fcdc04 33% 66%, #d90000 66%); }
+  .links { display: none; gap: 22px; }
+  .links a { text-decoration: none; color: var(--muted); font-size: 16px; }
+  .links a:hover { color: var(--ink); }
+  @media (min-width: 900px) { .links { display: flex; } }
+
+  /* hero */
+  .hero { text-align: center; padding: 48px 0 8px; }
+  h1 { font-size: clamp(32px, 5.2vw, 52px); line-height: 1.12; letter-spacing: -0.025em; font-weight: 700;
+       margin: 28px auto 0; max-width: 900px; }
+  .grad { background: linear-gradient(90deg, var(--grad-a), var(--grad-b)); -webkit-background-clip: text;
+          background-clip: text; color: transparent; }
+  .sub { color: var(--muted); font-size: clamp(16px, 2vw, 20px); margin: 20px auto 0; max-width: 640px; }
+  .searchbar { display: flex; max-width: 688px; margin: 32px auto 0; }
+  .searchbar input { flex: 1; min-width: 0; height: 48px; padding: 0 14px; border: 1px solid var(--line);
+                     border-right: 0; border-radius: var(--radius) 0 0 var(--radius); font: inherit; font-size: 15px;
+                     background: var(--surface); color: var(--ink); }
+  .searchbar button { width: 48px; height: 48px; border: 0; border-radius: 0 var(--radius) var(--radius) 0;
+                      background: var(--primary); color: #fff; display: grid; place-items: center; cursor: pointer; }
+  input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+  .stats { display: flex; justify-content: center; gap: 8px 28px; flex-wrap: wrap; margin-top: 22px; color: var(--muted); font-size: 14px; }
+  .stats b { color: var(--ink); font-weight: 600; }
+
+  /* directory */
+  .directory { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 48px 0 24px; }
+  .sidebar, .card { min-width: 0; }
+  @media (min-width: 1024px) { .directory { grid-template-columns: 270px minmax(0, 1fr); } }
+  .directory > div { min-width: 0; }
+  .sidebar { align-self: start; border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  @media (min-width: 1024px) { .sidebar { position: sticky; top: 84px; } }
+  .sidebar-title { font-size: 13px; color: var(--muted); margin: 0 4px 8px; font-weight: 500; }
+  .cats { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; }
+  @media (min-width: 1024px) { .cats { flex-direction: column; overflow: visible; } }
+  .cat { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 7px 12px; border-radius: 6px;
+         border: 0; background: none; color: var(--ink); font: inherit; font-size: 15px; text-align: left;
+         cursor: pointer; white-space: nowrap; }
+  .cat:hover { background: var(--hover); }
+  .cat .n { color: var(--muted); font-size: 13px; flex: none; }
+  @media (min-width: 1024px) { .cat { white-space: normal; line-height: 1.35; } }
+  .cat.active { background: var(--primary); color: #fff; }
+  .cat.active .n { color: rgba(255,255,255,.8); }
+
+  .filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 24px; }
+  @media (min-width: 768px) { .filters { grid-template-columns: repeat(3, minmax(0, 1fr)) auto; } }
+  select, .reset { height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface);
+                   color: var(--ink); font: inherit; font-size: 15px; }
+  select { appearance: none; padding-right: 34px; cursor: pointer;
+           background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%236b7280' stroke-width='2' viewBox='0 0 24 24'%3E%3Cpath d='m7 15 5 5 5-5M7 9l5-5 5 5'/%3E%3C/svg%3E");
+           background-repeat: no-repeat; background-position: right 12px center; }
+  .reset { cursor: pointer; padding: 0 28px; }
+  .reset:hover { background: var(--hover); }
+  .result-meta { color: var(--muted); font-size: 14px; margin: -8px 0 16px; }
+
+  .grid { display: grid; gap: 24px; }
+  @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1280px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .card { display: flex; flex-direction: column; gap: 14px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 8px;
+          background: var(--surface); min-height: 236px; transition: box-shadow .15s, transform .15s; }
+  .card:hover { box-shadow: 0 6px 20px rgba(0,0,0,.06); transform: translateY(-1px); }
+  .card.featured { background: var(--featured-bg); border-color: var(--featured-line); }
+  .card-head { display: flex; align-items: center; gap: 14px; min-width: 0; }
+  .avatar { flex: none; width: 32px; height: 32px; border-radius: 7px; display: grid; place-items: center; color: #fff;
+            font-size: 13px; font-weight: 700; overflow: hidden; }
+  .avatar { position: relative; }
+  .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
+  .card-name { font-size: 21px; font-weight: 500; letter-spacing: -0.01em; text-decoration: none; overflow: hidden;
+               text-overflow: ellipsis; white-space: nowrap; }
+  .card.featured .card-name { background: linear-gradient(90deg, var(--grad-a), var(--grad-b)); -webkit-background-clip: text;
+                              background-clip: text; color: transparent; }
+  a.card-name:hover { text-decoration: underline; text-decoration-color: var(--grad-b); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { border: 1px solid var(--chip-line); border-radius: 4px; padding: 1px 8px; font-size: 14px; color: var(--muted); }
+  .chip.careers { border-color: var(--primary); color: var(--primary); text-decoration: none; font-weight: 500; }
+  .desc { margin: 0; font-size: 15px; line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical;
+          overflow: hidden; overflow-wrap: anywhere; }
+  .desc.empty { color: var(--muted); }
+  .tags { margin-top: auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 4px 12px; color: var(--muted); font-size: 14px; }
+  .tags span::before { content: "# "; }
+
+  .pager { display: flex; justify-content: center; align-items: center; gap: 6px; flex-wrap: wrap; margin: 40px 0 0; }
+  .pager button { min-width: 40px; height: 40px; padding: 0 12px; border-radius: 6px; border: 1px solid transparent;
+                  background: none; color: var(--ink); font: inherit; cursor: pointer; }
+  .pager button:hover:not(:disabled) { background: var(--hover); }
+  .pager button.on { border-color: var(--line); font-weight: 600; }
+  .pager button:disabled { color: var(--muted); cursor: default; }
+  .empty-state { grid-column: 1/-1; text-align: center; color: var(--muted); padding: 60px 0; }
+
+  footer { border-top: 1px solid var(--line); margin-top: 64px; padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+  footer a { color: var(--ink); }
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="./"><span class="logo">ug</span><span class="wordmark"><span class="ug">ug</span>tech</span></a>
+    <nav class="links" aria-label="Main">
+      <a href="#directory">Directory</a>
+      <a href="https://github.com/Agaba-Ed/uganda-tech-companies/tree/main/data">Data</a>
+      <a href="https://github.com/Agaba-Ed/uganda-tech-companies/blob/main/CONTRIBUTING.md">Contribute</a>
+      <a href="https://github.com/Agaba-Ed/uganda-tech-companies#readme">About</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>The Open Directory of <span class="grad">Tech Companies in Uganda</span></h1>
+    <p class="sub">Software houses, fintechs, ISPs, IT firms, AI startups and tech hubs, built from public web data.</p>
+    <form class="searchbar" id="searchForm" role="search">
+      <input id="q" type="search" placeholder="Search companies, sectors, technologies…" aria-label="Search" autocomplete="off">
+      <button type="submit" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </button>
+    </form>
+    <div class="stats" id="stats"></div>
+  </section>
+
+  <section class="directory" id="directory">
+    <aside class="sidebar" aria-label="Sectors">
+      <p class="sidebar-title">Sectors</p>
+      <div class="cats" id="cats"></div>
+    </aside>
+    <div>
+      <div class="filters">
+        <select id="list" aria-label="List">
+          <option value="companies">Verified companies</option>
+          <option value="all">Verified + unverified</option>
+          <option value="unverified">Unverified only</option>
+        </select>
+        <select id="has" aria-label="Filter">
+          <option value="">No filter</option>
+          <option value="website">Has website</option>
+          <option value="careers">Has careers page</option>
+          <option value="devs">Employs GitHub developers</option>
+          <option value="email">Has contact email</option>
+        </select>
+        <select id="sort" aria-label="Sort">
+          <option value="featured">Sort by relevance</option>
+          <option value="name">Sort by name (A–Z)</option>
+          <option value="devs">Sort by GitHub developers</option>
+        </select>
+        <button class="reset" id="reset" type="button">Reset</button>
+      </div>
+      <p class="result-meta" id="meta">Loading…</p>
+      <div class="grid" id="grid"></div>
+      <nav class="pager" id="pager" aria-label="Pagination"></nav>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container foot">
+    <span>Developed by Ed</span>
+    <span><a href="https://agaba.dev">agaba.dev</a></span>
+  </div>
+</footer>
+
+<script>
+// RFC 4180 CSV parser: quoted fields, escaped quotes, newlines inside quotes.
+function parseCSV(text) {
+  const rows = []; let row = [], field = "", quoted = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (quoted) {
+      if (c === '"' && text[i + 1] === '"') { field += '"'; i++; }
+      else if (c === '"') quoted = false;
+      else field += c;
+    } else if (c === '"') quoted = true;
+    else if (c === ",") { row.push(field); field = ""; }
+    else if (c === "\n" || c === "\r") {
+      if (c === "\r" && text[i + 1] === "\n") i++;
+      row.push(field); rows.push(row); row = []; field = "";
+    } else field += c;
+  }
+  if (field || row.length) { row.push(field); rows.push(row); }
+  const [head, ...body] = rows;
+  return body.filter(r => r.length === head.length).map(r => Object.fromEntries(head.map((h, i) => [h, r[i]])));
+}
+
+const $ = id => document.getElementById(id);
+const PER_PAGE = 24;
+const PALETTE = ["#a16207", "#2563eb", "#0891b2", "#059669", "#b45309", "#dc2626", "#db2777", "#854d0e", "#0d9488", "#92400e"];
+let data = { companies: [], unverified: [] }, sector = "", page = 1;
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const safeUrl = u => (/^https?:\/\//i.test(u) ? u : "");
+const sectorsOf = r => (r.sector ? r.sector.split(" · ") : []);
+const rank = { high: 0, medium: 1, low: 2 };
+
+function initials(name) {
+  const w = name.replace(/[^A-Za-z0-9 ]/g, " ").trim().split(/\s+/).filter(Boolean);
+  return ((w[0] || "?")[0] + (w[1] ? w[1][0] : (w[0] || "").slice(1, 2))).toUpperCase();
+}
+function colour(name) { let h = 0; for (const ch of name) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return PALETTE[h % PALETTE.length]; }
+
+function rows() {
+  const l = $("list").value;
+  return l === "all" ? data.companies.concat(data.unverified) : data[l];
+}
+
+function filtered() {
+  const q = $("q").value.trim().toLowerCase(), has = $("has").value, sort = $("sort").value;
+  const out = rows().filter(r =>
+    (!sector || sectorsOf(r).includes(sector)) &&
+    (!q || [r.name, r.description, r.domain, r.stack_mentions, r.sector, r.location].join(" ").toLowerCase().includes(q)) &&
+    (!has || (has === "website" && r.website) || (has === "careers" && r.careers_page) ||
+             (has === "devs" && +r.github_devs > 0) || (has === "email" && r.email)));
+  const byName = (a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+  if (sort === "name") out.sort(byName);
+  else if (sort === "devs") out.sort((a, b) => (+b.github_devs || 0) - (+a.github_devs || 0) || byName(a, b));
+  else out.sort((a, b) => rank[a.confidence] - rank[b.confidence] || (!!b.description - !!a.description) ||
+                          (+b.github_devs || 0) - (+a.github_devs || 0) || byName(a, b));
+  return out;
+}
+
+function card(r) {
+  const web = safeUrl(r.website), careers = safeUrl(r.careers_page);
+  const fav = r.domain ? `<img src="https://icons.duckduckgo.com/ip3/${encodeURIComponent(r.domain)}.ico" alt="" loading="lazy"
+      onerror="this.remove()">` : "";
+  const nameEl = web ? `<a class="card-name" href="${esc(web)}" target="_blank" rel="noopener">${esc(r.name)}</a>`
+                     : `<span class="card-name">${esc(r.name)}</span>`;
+  const chips = sectorsOf(r).map(s => `<span class="chip">${esc(s)}</span>`)
+    .concat(careers ? [`<a class="chip careers" href="${esc(careers)}" target="_blank" rel="noopener">Careers ↗</a>`] : []).join("");
+  const tags = []
+    .concat(r.stack_mentions ? r.stack_mentions.split(", ").slice(0, 3) : [])
+    .concat(+r.github_devs > 0 ? [`${r.github_devs} dev${r.github_devs === "1" ? "" : "s"}`] : [])
+    .concat(r.location ? [r.location.split(", ").pop()] : []);
+  const desc = r.description || (r.email ? r.email : r.domain ? r.domain : "No description yet.");
+  return `<article class="card${r.confidence === "high" && careers ? " featured" : ""}">
+    <div class="card-head"><span class="avatar" style="background:${colour(r.name)}">${esc(initials(r.name))}${fav}</span>${nameEl}</div>
+    ${chips ? `<div class="chips">${chips}</div>` : ""}
+    <p class="desc${r.description ? "" : " empty"}">${esc(desc)}</p>
+    ${tags.length ? `<div class="tags">${tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
+  </article>`;
+}
+
+function renderCats() {
+  const all = rows(), counts = {};
+  all.forEach(r => sectorsOf(r).forEach(s => (counts[s] = (counts[s] || 0) + 1)));
+  const list = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  $("cats").innerHTML = [["", all.length, "All sectors"], ...list.map(([s, n]) => [s, n, s])]
+    .map(([s, n, label]) => `<button type="button" class="cat${s === sector ? " active" : ""}" data-s="${esc(s)}">
+      <span>${esc(label)}</span><span class="n">${n.toLocaleString()}</span></button>`).join("");
+}
+
+function renderPager(total) {
+  const pages = Math.ceil(total / PER_PAGE);
+  if (pages <= 1) { $("pager").innerHTML = ""; return; }
+  const nums = new Set([1, pages, page - 1, page, page + 1].filter(n => n >= 1 && n <= pages));
+  let html = `<button type="button" data-p="${page - 1}" ${page === 1 ? "disabled" : ""}>‹ Previous</button>`, last = 0;
+  [...nums].sort((a, b) => a - b).forEach(n => {
+    if (n - last > 1) html += `<button type="button" disabled>…</button>`;
+    html += `<button type="button" data-p="${n}" class="${n === page ? "on" : ""}">${n}</button>`; last = n;
+  });
+  $("pager").innerHTML = html + `<button type="button" data-p="${page + 1}" ${page === pages ? "disabled" : ""}>Next ›</button>`;
+}
+
+function render() {
+  const out = filtered(), start = (page - 1) * PER_PAGE;
+  $("meta").textContent = `${out.length.toLocaleString()} compan${out.length === 1 ? "y" : "ies"}` + (sector ? ` in ${sector}` : "");
+  $("grid").innerHTML = out.slice(start, start + PER_PAGE).map(card).join("") ||
+    `<p class="empty-state">No companies match. Try another search or <a href="https://github.com/Agaba-Ed/uganda-tech-companies/issues/new?template=add-company.yml">add one</a>.</p>`;
+  renderPager(out.length);
+}
+
+function update(resetPage = true) { if (resetPage) page = 1; render(); }
+
+Promise.all(["companies", "unverified"].map(n => fetch(`data/${n}.csv`).then(r => r.text()).then(t => [n, parseCSV(t)])))
+  .then(entries => {
+    data = Object.fromEntries(entries);
+    const all = data.companies.concat(data.unverified);
+    $("stats").innerHTML = `<span><b>${data.companies.length.toLocaleString()}</b> verified</span>
+      <span><b>${all.length.toLocaleString()}</b> in total</span>
+      <span><b>${all.filter(r => r.careers_page).length}</b> with careers pages</span>`;
+    renderCats(); render();
+  })
+  .catch(() => { $("meta").textContent = "Could not load the data files."; });
+
+$("searchForm").addEventListener("submit", e => { e.preventDefault(); update(); $("directory").scrollIntoView({ behavior: "smooth" }); });
+$("q").addEventListener("input", () => update());
+["has", "sort"].forEach(id => $(id).addEventListener("change", () => update()));
+$("list").addEventListener("change", () => { sector = ""; renderCats(); update(); });
+$("cats").addEventListener("click", e => {
+  const b = e.target.closest(".cat"); if (!b) return;
+  sector = b.dataset.s; renderCats(); update();
+});
+$("pager").addEventListener("click", e => {
+  const b = e.target.closest("button[data-p]"); if (!b || b.disabled) return;
+  page = +b.dataset.p; render(); $("directory").scrollIntoView({ behavior: "smooth" });
+});
+$("reset").addEventListener("click", () => {
+  $("q").value = ""; $("has").value = ""; $("sort").value = "featured"; $("list").value = "companies"; sector = "";
+  renderCats(); update();
+});
+</script>
+</body>
+</html>

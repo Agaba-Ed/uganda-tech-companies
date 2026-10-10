@@ -1,0 +1,4 @@
+# Names or domains that must never be (re-)added, one per line. Used for removal requests and
+# entries that turned out to be people rather than companies.
+Peter Kakoma
+kakoma.ug

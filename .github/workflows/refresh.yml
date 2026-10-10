@@ -1,0 +1,55 @@
+name: Weekly refresh
+
+# Re-harvests Common Crawl, GitHub and OpenStreetMap, classifies new websites and opens a pull
+# request adding any new candidates to data/unverified.csv. Nothing is merged automatically.
+on:
+  schedule:
+    - cron: "0 4 * * 1"  # Mondays 04:00 UTC (07:00 Kampala)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Harvest Common Crawl (.ug domains)
+        run: python scripts/harvest_commoncrawl.py --crawls 1
+        continue-on-error: true
+      - name: Harvest GitHub (orgs and developer employers)
+        run: python scripts/harvest_github.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+      - name: Harvest OpenStreetMap
+        run: python scripts/harvest_osm.py
+        continue-on-error: true
+
+      - name: Fetch and classify new homepages
+        run: |
+          python scripts/prepare.py
+          python scripts/fetch_homepages.py build/to_fetch.txt --workers 32
+          python scripts/classify.py
+      - name: Update dataset
+        run: |
+          python scripts/update.py
+          python scripts/validate.py
+
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          branch: weekly-refresh
+          delete-branch: true
+          commit-message: "Weekly refresh: new candidate companies"
+          title: "Weekly refresh: new candidate companies"
+          body-path: build/summary.md
+          add-paths: |
+            data/*.csv
+            state/seen_domains.txt

@@ -1,0 +1,23 @@
+name: Add a company
+description: Suggest a tech company in Uganda that is missing
+title: "Add: "
+labels: ["add"]
+body:
+  - type: input
+    id: name
+    attributes: { label: Company name }
+    validations: { required: true }
+  - type: input
+    id: website
+    attributes: { label: Website, placeholder: "https://" }
+  - type: dropdown
+    id: sector
+    attributes:
+      label: Sector
+      options: [Fintech / Payments, Software house / Agency, Hosting / Cloud / ISP / Telecom, IT services / Systems integration, Cybersecurity, AI / Data, Healthtech, Edtech, Agritech, E-commerce / Marketplace, Messaging / SMS / USSD, Tech hub / Training, Other]
+  - type: input
+    id: careers
+    attributes: { label: Careers page (optional) }
+  - type: textarea
+    id: notes
+    attributes: { label: Anything else?, description: "What they do, where they are based. Please don't include personal contact details." }

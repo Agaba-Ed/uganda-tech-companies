@@ -1,0 +1,18 @@
+name: Correct or remove a company
+description: Fix wrong details, or ask for an entry to be removed
+title: "Correct: "
+labels: ["correction"]
+body:
+  - type: input
+    id: name
+    attributes: { label: Company name as listed }
+    validations: { required: true }
+  - type: dropdown
+    id: action
+    attributes:
+      label: What should happen?
+      options: [Correct details, Remove (not a tech company / closed / duplicate), Remove (I represent this company), Remove (this is a person, not a company)]
+    validations: { required: true }
+  - type: textarea
+    id: details
+    attributes: { label: Details, description: "What's wrong and what it should say." }
