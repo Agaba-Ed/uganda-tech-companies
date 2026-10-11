@@ -16,7 +16,7 @@ sorted by name. Multiple values in one cell are separated by `; ` or `, `.
 | `email` | Role-based contact addresses only (info@, careers@, hr@ …) |
 | `location` | Street and city, when known (mostly from OpenStreetMap) |
 | `stack_mentions` | Technologies mentioned on the homepage (react, django, aws …) |
-| `sources` | Where the entry came from: `Common Crawl (.ug)`, `OpenStreetMap`, `GitHub org`, `GitHub developers`, `Curated` |
+| `sources` | Where the entry came from: `Common Crawl (.ug)`, `OpenStreetMap`, `GitHub org`, `GitHub developers`, `yellow.ug directory`, `Curated (<list it came from>)` |
 
 ## Confidence
 

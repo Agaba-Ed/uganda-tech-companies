@@ -1,0 +1,18 @@
+[project]
+name = "uganda-tech-companies"
+version = "1.0.0"
+description = "Pipeline that builds the open directory of tech companies in Uganda"
+requires-python = ">=3.10"
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "UP", "SIM", "C90", "PL", "S", "RUF"]
+# PLR2004: small literal thresholds are clearer inline; S310/S603/S607: we fetch fixed public URLs on purpose;
+# E501: long regexes and URLs.
+ignore = ["PLR2004", "S310", "S603", "S607", "S101", "E501"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10

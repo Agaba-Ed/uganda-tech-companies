@@ -15,4 +15,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Lint
+        run: pipx run ruff check scripts && pipx run ruff format --check scripts
       - run: python scripts/validate.py

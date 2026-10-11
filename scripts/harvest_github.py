@@ -5,6 +5,7 @@ Only aggregate employer counts are written. No usernames or personal details are
 Needs GITHUB_TOKEN (or GH_TOKEN) in the environment.
 Output: build/gh_employers.tsv (employer, developer_count), build/gh_orgs.tsv
 """
+
 import datetime as dt
 import json
 import os
@@ -16,8 +17,21 @@ from collections import Counter
 from common import BUILD
 
 TOKEN = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
-LOCATIONS = ["Uganda", "Kampala", "Entebbe", "Mbarara", "Gulu", "Jinja", "Wakiso", "Mukono", "Mbale", "Lira",
-             "Fort Portal", "Masaka", "Arua"]
+LOCATIONS = [
+    "Uganda",
+    "Kampala",
+    "Entebbe",
+    "Mbarara",
+    "Gulu",
+    "Jinja",
+    "Wakiso",
+    "Mukono",
+    "Mbale",
+    "Lira",
+    "Fort Portal",
+    "Masaka",
+    "Arua",
+]
 USER_Q = """query($q:String!,$after:String){search(query:$q,type:USER,first:100,after:$after){userCount
 pageInfo{hasNextPage endCursor} nodes{... on User{login company}}}}"""
 ORG_Q = """query($q:String!,$after:String){search(query:$q,type:USER,first:100,after:$after){userCount
@@ -30,15 +44,23 @@ NOISE = re.compile(
     r"kampala|freelanc\w*|free ?lancer?|self[- ]?employed.*|open to work|looking.*|available.*|personal|hobby\w*|"
     r".*developer|.*engineer|.*programmer|.*designer|.*student.*|software|web|github|https?:?|github\.com|research|"
     r"individual|travel|sponsor|sql|own start ?up|it solutions|consultant|consulting|company|business|startup|tech|"
-    r"technology|.*\.github\.io|-|\.|\?)$", re.I)
-EDU = re.compile(r"byu|pathway|universit|college|school|institute of|academy\b|polytechnic|\bkiu\b|\bmubs\b|"
-                 r"\bucu\b|\bmust\b|\bslau\b|\bisbat\b|\bmak\b|makerere|kyambogo|\balx\b|microverse|holberton", re.I)
+    r"technology|.*\.github\.io|-|\.|\?)$",
+    re.I,
+)
+EDU = re.compile(
+    r"byu|pathway|universit|college|school|institute of|academy\b|polytechnic|\bkiu\b|\bmubs\b|"
+    r"\bucu\b|\bmust\b|\bslau\b|\bisbat\b|\bmak\b|makerere|kyambogo|\balx\b|microverse|holberton",
+    re.I,
+)
 
 
 def gql(query, variables):
     body = json.dumps({"query": query, "variables": variables}).encode()
-    req = urllib.request.Request("https://api.github.com/graphql", data=body,
-                                 headers={"Authorization": f"bearer {TOKEN}", "Content-Type": "application/json"})
+    req = urllib.request.Request(
+        "https://api.github.com/graphql",
+        data=body,
+        headers={"Authorization": f"bearer {TOKEN}", "Content-Type": "application/json"},
+    )
     for attempt in range(6):
         try:
             with urllib.request.urlopen(req, timeout=60) as r:
@@ -82,8 +104,8 @@ def main():
 
     employers, display = Counter(), {}
     for u in users.values():
-        for part in re.split(r"\s*[,/|&]\s*|\s+and\s+", u.get("company") or ""):
-            part = re.sub(r"\s+", " ", part.strip().lstrip("@").strip(" .-"))
+        for raw in re.split(r"\s*[,/|&]\s*|\s+and\s+", u.get("company") or ""):
+            part = re.sub(r"\s+", " ", raw.strip().lstrip("@").strip(" .-"))
             if not part or len(part) > 60 or NOISE.match(part) or EDU.search(part):
                 continue
             key = part.lower()
@@ -98,8 +120,14 @@ def main():
         for o in orgs.values():
             if EDU.search(f"{o.get('name') or ''} {o.get('description') or ''}"):
                 continue
-            row = [o["login"], o.get("name") or "", o.get("websiteUrl") or "", o.get("description") or "",
-                   o.get("location") or "", str(o.get("repositories", {}).get("totalCount", 0))]
+            row = [
+                o["login"],
+                o.get("name") or "",
+                o.get("websiteUrl") or "",
+                o.get("description") or "",
+                o.get("location") or "",
+                str(o.get("repositories", {}).get("totalCount", 0)),
+            ]
             f.write("\t".join(c.replace("\t", " ").replace("\n", " ") for c in row) + "\n")
     print(f"employers: {len(employers)}, orgs: {len(orgs)}")
 

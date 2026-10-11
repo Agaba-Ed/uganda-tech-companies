@@ -3,7 +3,9 @@
 usage: python scripts/fetch_homepages.py <domains.txt> [--workers 32]
 Output: build/html/<domain>.html and build/fetch_log.tsv (domain, status, final_url)
 """
+
 import argparse
+import logging
 import os
 import ssl
 import urllib.request
@@ -11,9 +13,12 @@ from concurrent.futures import ThreadPoolExecutor
 
 from common import BUILD
 
+LOG = logging.getLogger(__name__)
+
 HTML = os.path.join(BUILD, "html")
 UA = "Mozilla/5.0 (compatible; uganda-tech-companies/1.0; +https://github.com/Agaba-Ed/uganda-tech-companies)"
-# Many small Ugandan sites have expired or self-signed certificates; we only read public homepages.
+# Many small Ugandan sites have expired or self-signed certificates. Verified TLS is always tried
+# first; the unverified context is only a fallback for reading a public homepage, and nothing is sent.
 INSECURE = ssl.create_default_context()
 INSECURE.check_hostname = False
 INSECURE.verify_mode = ssl.CERT_NONE
@@ -23,17 +28,27 @@ def fetch(domain):
     path = os.path.join(HTML, domain + ".html")
     if os.path.exists(path) and os.path.getsize(path):
         return domain, "200", ""
-    for url in (f"https://{domain}/", f"https://www.{domain}/", f"http://{domain}/", f"http://www.{domain}/"):
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": UA})
-            with urllib.request.urlopen(req, timeout=20, context=INSECURE) as r:
-                body = r.read(1_000_000)
-                with open(path, "wb") as f:
-                    f.write(body)
-                return domain, str(r.status), r.geturl()
-        except Exception:
-            continue
+    attempts = [(f"https://{host}/", ctx) for host in (domain, f"www.{domain}") for ctx in (None, INSECURE)]
+    attempts += [(f"http://{host}/", None) for host in (domain, f"www.{domain}")]
+    for url, ctx in attempts:
+        result = try_fetch(url, ctx, path)
+        if result:
+            return (domain, *result)
     return domain, "000", ""
+
+
+def try_fetch(url, ctx, path):
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": UA})
+        with urllib.request.urlopen(req, timeout=20, context=ctx) as r:
+            body = r.read(1_000_000)
+            status, final = str(r.status), r.geturl()
+    except (OSError, ValueError) as e:  # URLError, TLS and socket errors are OSErrors
+        LOG.debug("%s: %s", url, e)
+        return None
+    with open(path, "wb") as f:
+        f.write(body)
+    return status, final
 
 
 def main():
@@ -42,7 +57,8 @@ def main():
     ap.add_argument("--workers", type=int, default=32)
     args = ap.parse_args()
     os.makedirs(HTML, exist_ok=True)
-    domains = [d.strip() for d in open(args.domains) if d.strip()]
+    with open(args.domains, encoding="utf-8") as f:
+        domains = [d.strip() for d in f if d.strip()]
     ok = 0
     with ThreadPoolExecutor(args.workers) as pool, open(os.path.join(BUILD, "fetch_log.tsv"), "a") as log:
         for domain, status, final in pool.map(fetch, domains):

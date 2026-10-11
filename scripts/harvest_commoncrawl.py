@@ -5,6 +5,7 @@ Reads the snapshot's cluster.idx (the secondary index), finds the blocks whose k
 
 usage: python scripts/harvest_commoncrawl.py [--crawls 2]
 """
+
 import argparse
 import gzip
 import json
@@ -22,7 +23,7 @@ UA = {"User-Agent": "uganda-tech-companies (+https://github.com/Agaba-Ed/uganda-
 def get(url, byte_range=None, timeout=300):
     headers = dict(UA)
     if byte_range:
-        headers["Range"] = "bytes=%d-%d" % byte_range
+        headers["Range"] = f"bytes={byte_range[0]}-{byte_range[1]}"
     with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=timeout) as r:
         return r.read()
 
@@ -36,11 +37,11 @@ def registrable(surt_host):
 
 def harvest(crawl):
     lines = get(f"{BASE}/{crawl}/indexes/cluster.idx", timeout=900).decode().splitlines()
-    idx = [i for i, l in enumerate(lines) if l.startswith(("ug,", "ug)"))]
+    idx = [i for i, entry in enumerate(lines) if entry.startswith(("ug,", "ug)"))]
     if not idx:
         return set()
     hosts = set()
-    for line in lines[max(idx[0] - 1, 0): idx[-1] + 1]:
+    for line in lines[max(idx[0] - 1, 0) : idx[-1] + 1]:
         _, cdx_file, offset, length, _ = line.split("\t")
         raw = get(f"{BASE}/{crawl}/indexes/{cdx_file}", (int(offset), int(offset) + int(length) - 1))
         for rec in gzip.decompress(raw).decode(errors="ignore").splitlines():
@@ -54,7 +55,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--crawls", type=int, default=2, help="how many of the latest snapshots to read")
     args = ap.parse_args()
-    crawls = [c["id"] for c in json.loads(get("https://index.commoncrawl.org/collinfo.json", timeout=60))][: args.crawls]
+    crawls = [c["id"] for c in json.loads(get("https://index.commoncrawl.org/collinfo.json", timeout=60))][
+        : args.crawls
+    ]
     domains = set()
     for c in crawls:
         try:

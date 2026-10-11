@@ -4,17 +4,39 @@ Combines domains from Common Crawl, OpenStreetMap and GitHub orgs, drops ones al
 evaluated (state/seen_domains.txt) or already in the dataset.
 Output: build/to_fetch.txt, build/source_map.tsv
 """
+
 import os
 
 from common import BUILD, DATA, STATE, domain_of, read_csv
 
-SKIP_HOSTS = ("github.io", "github.com", "linkedin.com", "twitter.com", "x.com", "facebook.com", "medium.com",
-              "youtube.com", "instagram.com", "vercel.app", "netlify.app", "herokuapp.com", "blogspot.com",
-              "wordpress.com", "google.com", "linktr.ee", "notion.site", "wixsite.com", "bit.ly")
+SKIP_HOSTS = (
+    "github.io",
+    "github.com",
+    "linkedin.com",
+    "twitter.com",
+    "x.com",
+    "facebook.com",
+    "medium.com",
+    "youtube.com",
+    "instagram.com",
+    "vercel.app",
+    "netlify.app",
+    "herokuapp.com",
+    "blogspot.com",
+    "wordpress.com",
+    "google.com",
+    "linktr.ee",
+    "notion.site",
+    "wixsite.com",
+    "bit.ly",
+)
 
 
 def lines(path):
-    return [l.strip() for l in open(path)] if os.path.exists(path) else []
+    if not os.path.exists(path):
+        return []
+    with open(path, encoding="utf-8") as f:
+        return [line.strip() for line in f]
 
 
 def main():
