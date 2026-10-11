@@ -1,7 +1,7 @@
 name: Weekly refresh
 
-# Re-harvests Common Crawl, GitHub and OpenStreetMap, classifies new websites and opens a pull
-# request adding any new candidates to data/unverified.csv. Nothing is merged automatically.
+# Re-harvests Common Crawl, GitHub, OpenStreetMap and the yellow.ug directory, classifies new websites,
+# merges state/curated.csv, looks for careers pages and opens a pull request with the changes. Nothing is merged automatically.
 on:
   schedule:
     - cron: "0 4 * * 1"  # Mondays 04:00 UTC (07:00 Kampala)
@@ -14,7 +14,7 @@ permissions:
 jobs:
   refresh:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 200
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -32,6 +32,10 @@ jobs:
       - name: Harvest OpenStreetMap
         run: python scripts/harvest_osm.py
         continue-on-error: true
+      - name: Harvest yellow.ug tech categories
+        run: python scripts/harvest_yellow.py --delay 2
+        timeout-minutes: 90
+        continue-on-error: true
 
       - name: Fetch and classify new homepages
         run: |
@@ -41,6 +45,7 @@ jobs:
       - name: Update dataset
         run: |
           python scripts/update.py
+          python scripts/find_careers.py
           python scripts/validate.py
 
       - uses: peter-evans/create-pull-request@v7

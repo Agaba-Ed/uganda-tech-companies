@@ -3,12 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ugtech</title>
+<title>ugtech · Tech Companies in Uganda</title>
 <meta name="color-scheme" content="light">
-<meta name="description" content="An open, searchable directory of technology companies in Uganda.">
+<meta name="description" content="An open, searchable directory of 850+ technology companies in Uganda: fintechs, software houses, ISPs, banks' tech teams, AI startups and more.">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://agaba-ed.github.io/uganda-tech-companies/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ugtech">
+<meta property="og:title" content="ugtech · Tech Companies in Uganda">
+<meta property="og:description" content="An open, searchable directory of 850+ technology companies in Uganda. Free to use, open data.">
+<meta property="og:url" content="https://agaba-ed.github.io/uganda-tech-companies/">
+<meta property="og:image" content="https://agaba-ed.github.io/uganda-tech-companies/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ugtech: the open directory of tech companies in Uganda">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ugtech · Tech Companies in Uganda">
+<meta name="twitter:description" content="An open, searchable directory of 850+ technology companies in Uganda.">
+<meta name="twitter:image" content="https://agaba-ed.github.io/uganda-tech-companies/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet">
+<!-- the font stylesheet loads without blocking the first paint -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap"></noscript>
+<link rel="preload" as="fetch" href="data/companies.csv" crossorigin>
 <style>
   /* Layout and visual language modelled on the Mkdirs directory template (demo.mkdirs.com, Apache-2.0). */
   :root {
@@ -33,10 +55,7 @@
   @media (max-width: 520px) { .nav { gap: 12px; } }
   .brand .wordmark { font-size: 17px; }
   .brand .ug { color: var(--primary); }
-  .logo { width: 32px; height: 32px; border-radius: 8px; background: #0a0a0a; color: #fff; display: grid;
-          place-items: center; font-size: 14px; font-weight: 700; position: relative; overflow: hidden; }
-  .logo::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 5px;
-                 background: linear-gradient(90deg, #000 33%, #fcdc04 33% 66%, #d90000 66%); }
+  .logo { width: 32px; height: 32px; display: block; }
   .links { display: none; gap: 22px; }
   .links a { text-decoration: none; color: var(--muted); font-size: 16px; }
   .links a:hover { color: var(--ink); }
@@ -56,7 +75,7 @@
   .searchbar button { width: 48px; height: 48px; border: 0; border-radius: 0 var(--radius) var(--radius) 0;
                       background: var(--primary); color: #fff; display: grid; place-items: center; cursor: pointer; }
   input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
-  .stats { display: flex; justify-content: center; gap: 8px 28px; flex-wrap: wrap; margin-top: 22px; color: var(--muted); font-size: 14px; }
+  .stats { min-height: 24px; display: flex; justify-content: center; gap: 8px 28px; flex-wrap: wrap; margin-top: 22px; color: var(--muted); font-size: 14px; }
   .stats b { color: var(--ink); font-weight: 600; }
 
   /* directory */
@@ -76,7 +95,7 @@
   .cat .n { color: var(--muted); font-size: 13px; flex: none; }
   @media (min-width: 1024px) { .cat { white-space: normal; line-height: 1.35; } }
   .cat.active { background: var(--primary); color: #fff; }
-  .cat.active .n { color: rgba(255,255,255,.8); }
+  .cat.active .n { color: #fff; }
 
   .filters { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 24px; }
   @media (min-width: 768px) { .filters { grid-template-columns: repeat(3, minmax(0, 1fr)) auto; } }
@@ -90,6 +109,7 @@
   .result-meta { color: var(--muted); font-size: 14px; margin: -8px 0 16px; }
 
   .grid { display: grid; gap: 24px; }
+  .grid:empty { min-height: 150vh; }
   @media (min-width: 640px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (min-width: 1280px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   .card { display: flex; flex-direction: column; gap: 14px; padding: 22px 24px; border: 1px solid var(--line); border-radius: 8px;
@@ -131,7 +151,7 @@
 <body>
 <header>
   <div class="container nav">
-    <a class="brand" href="./"><span class="logo">ug</span><span class="wordmark"><span class="ug">ug</span>tech</span></a>
+    <a class="brand" href="./"><img class="logo" src="favicon.svg" alt="" width="32" height="32"><span class="wordmark"><span class="ug">ug</span>tech</span></a>
     <nav class="links" aria-label="Main">
       <a href="#directory">Directory</a>
       <a href="https://github.com/Agaba-Ed/uganda-tech-companies/tree/main/data">Data</a>
@@ -170,13 +190,13 @@
           <option value="">No filter</option>
           <option value="website">Has website</option>
           <option value="careers">Has careers page</option>
-          <option value="devs">Employs GitHub developers</option>
+          <option value="devs">Named on GitHub profiles</option>
           <option value="email">Has contact email</option>
         </select>
         <select id="sort" aria-label="Sort">
           <option value="featured">Sort by relevance</option>
           <option value="name">Sort by name (A–Z)</option>
-          <option value="devs">Sort by GitHub developers</option>
+          <option value="devs">Sort by GitHub profiles naming them</option>
         </select>
         <button class="reset" id="reset" type="button">Reset</button>
       </div>
@@ -189,8 +209,8 @@
 
 <footer>
   <div class="container foot">
-    <span>Developed by Ed</span>
-    <span><a href="https://agaba.dev">agaba.dev</a></span>
+    <span>Data under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL</a>. Includes data © OpenStreetMap contributors.</span>
+    <span><a href="https://github.com/Agaba-Ed/uganda-tech-companies/issues/new?template=correct-or-remove.yml">Correct or remove a company</a></span>
   </div>
 </footer>
 
@@ -237,6 +257,20 @@ function rows() {
   return l === "all" ? data.companies.concat(data.unverified) : data[l];
 }
 
+const loadCSV = name => fetch(`data/${name}.csv`).then(r => r.text()).then(parseCSV);
+let unverifiedLoad = null;
+function loadUnverified() {
+  unverifiedLoad ??= loadCSV("unverified").then(list => { data.unverified = list; renderStats(); });
+  return unverifiedLoad;
+}
+
+function renderStats() {
+  const total = data.companies.length + data.unverified.length;
+  $("stats").innerHTML = `<span><b>${data.companies.length.toLocaleString()}</b> verified</span>
+    <span><b>${data.unverified.length ? total.toLocaleString() : "…"}</b> in total</span>
+    <span><b>${data.companies.filter(r => r.careers_page).length}</b> with careers pages</span>`;
+}
+
 function filtered() {
   const q = $("q").value.trim().toLowerCase(), has = $("has").value, sort = $("sort").value;
   const out = rows().filter(r =>
@@ -260,16 +294,17 @@ function card(r) {
                      : `<span class="card-name">${esc(r.name)}</span>`;
   const chips = sectorsOf(r).map(s => `<span class="chip">${esc(s)}</span>`)
     .concat(careers ? [`<a class="chip careers" href="${esc(careers)}" target="_blank" rel="noopener">Careers ↗</a>`] : []).join("");
+  const devs = +r.github_devs;
   const tags = []
-    .concat(r.stack_mentions ? r.stack_mentions.split(", ").slice(0, 3) : [])
-    .concat(+r.github_devs > 0 ? [`${r.github_devs} dev${r.github_devs === "1" ? "" : "s"}`] : [])
-    .concat(r.location ? [r.location.split(", ").pop()] : []);
+    .concat(r.stack_mentions ? r.stack_mentions.split(", ").slice(0, 3).map(t => [t]) : [])
+    .concat(devs > 0 ? [[`On ${devs} GitHub profile${devs === 1 ? "" : "s"}`, `${devs} GitHub user${devs === 1 ? "" : "s"} in Uganda name${devs === 1 ? "s" : ""} this company on their profile`]] : [])
+    .concat(r.location ? [[r.location.split(", ").pop()]] : []);
   const desc = r.description || (r.email ? r.email : r.domain ? r.domain : "No description yet.");
   return `<article class="card${r.confidence === "high" && careers ? " featured" : ""}">
     <div class="card-head"><span class="avatar" style="background:${colour(r.name)}">${esc(initials(r.name))}${fav}</span>${nameEl}</div>
     ${chips ? `<div class="chips">${chips}</div>` : ""}
     <p class="desc${r.description ? "" : " empty"}">${esc(desc)}</p>
-    ${tags.length ? `<div class="tags">${tags.map(t => `<span>${esc(t)}</span>`).join("")}</div>` : ""}
+    ${tags.length ? `<div class="tags">${tags.map(([t, tip]) => `<span${tip ? ` title="${esc(tip)}"` : ""}>${esc(t)}</span>`).join("")}</div>` : ""}
   </article>`;
 }
 
@@ -304,21 +339,27 @@ function render() {
 
 function update(resetPage = true) { if (resetPage) page = 1; render(); }
 
-Promise.all(["companies", "unverified"].map(n => fetch(`data/${n}.csv`).then(r => r.text()).then(t => [n, parseCSV(t)])))
-  .then(entries => {
-    data = Object.fromEntries(entries);
-    const all = data.companies.concat(data.unverified);
-    $("stats").innerHTML = `<span><b>${data.companies.length.toLocaleString()}</b> verified</span>
-      <span><b>${all.length.toLocaleString()}</b> in total</span>
-      <span><b>${all.filter(r => r.careers_page).length}</b> with careers pages</span>`;
-    renderCats(); render();
+loadCSV("companies")
+  .then(list => {
+    data.companies = list;
+    renderStats(); renderCats(); render();
+    // the unverified list is only needed for the total and the other list views
+    (window.requestIdleCallback || setTimeout)(() => loadUnverified().catch(() => {}));
   })
   .catch(() => { $("meta").textContent = "Could not load the data files."; });
 
 $("searchForm").addEventListener("submit", e => { e.preventDefault(); update(); $("directory").scrollIntoView({ behavior: "smooth" }); });
-$("q").addEventListener("input", () => update());
+let typing;
+$("q").addEventListener("input", () => { clearTimeout(typing); typing = setTimeout(update, 120); });
 ["has", "sort"].forEach(id => $(id).addEventListener("change", () => update()));
-$("list").addEventListener("change", () => { sector = ""; renderCats(); update(); });
+$("list").addEventListener("change", async () => {
+  sector = "";
+  if ($("list").value !== "companies") {
+    $("meta").textContent = "Loading…";
+    await loadUnverified().catch(() => { $("meta").textContent = "Could not load the unverified list."; });
+  }
+  renderCats(); update();
+});
 $("cats").addEventListener("click", e => {
   const b = e.target.closest(".cat"); if (!b) return;
   sector = b.dataset.s; renderCats(); update();

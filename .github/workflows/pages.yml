@@ -26,7 +26,7 @@ jobs:
       - name: Assemble site
         run: |
           mkdir -p _site/data
-          cp site/index.html _site/
+          cp site/index.html site/*.svg site/*.png _site/
           cp data/companies.csv data/unverified.csv _site/data/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

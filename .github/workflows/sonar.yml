@@ -1,0 +1,26 @@
+name: SonarCloud
+
+# Static analysis (bugs, code smells, security hotspots) on SonarCloud. Inactive until the repo is
+# imported at sonarcloud.io and a SONAR_TOKEN repository secret is added.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  sonar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Analyse
+        if: ${{ env.SONAR_TOKEN != '' }}
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      - name: Skipped
+        if: ${{ env.SONAR_TOKEN == '' }}
+        run: echo "SONAR_TOKEN not set; import the repo at https://sonarcloud.io and add the secret to enable analysis."
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

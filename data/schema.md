@@ -10,13 +10,13 @@ sorted by name. Multiple values in one cell are separated by `; ` or `, `.
 | `domain` | Registrable domain of the website, used for de-duplication |
 | `sector` | Up to two labels, e.g. `Fintech / Payments · Software house / Agency`. Empty when unknown |
 | `confidence` | `high`, `medium` or `low`: how sure we are this is a real, active tech organisation in Uganda |
-| `github_devs` | Number of GitHub users located in Uganda who name this employer on their profile |
+| `github_devs` | Number of GitHub users located in Uganda who name this company as their employer on their profile (not a headcount) |
 | `description` | The site's own meta description or opening text (max 300 characters) |
 | `careers_page` | Link to a careers or jobs page, if one was found on the homepage |
 | `email` | Role-based contact addresses only (info@, careers@, hr@ …) |
 | `location` | Street and city, when known (mostly from OpenStreetMap) |
 | `stack_mentions` | Technologies mentioned on the homepage (react, django, aws …) |
-| `sources` | Where the entry came from: `Common Crawl (.ug)`, `OpenStreetMap`, `GitHub org`, `GitHub developers`, `Curated` |
+| `sources` | Where the entry came from: `Common Crawl (.ug)`, `OpenStreetMap`, `GitHub org`, `GitHub developers`, `yellow.ug directory`, `Curated (<list it came from>)` |
 
 ## Confidence
 
