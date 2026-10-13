@@ -5,6 +5,7 @@ Output: build/html/<domain>.html and build/fetch_log.tsv (domain, status, final_
 """
 
 import argparse
+import http.client
 import logging
 import os
 import ssl
@@ -37,15 +38,22 @@ def fetch(domain):
     return domain, "000", ""
 
 
-def try_fetch(url, ctx, path):
+def open_url(url, ctx=None, limit=1_000_000, timeout=20):
+    """(status, final_url, headers, body) or None. Pass ctx=INSECURE only as a fallback."""
     try:
         req = urllib.request.Request(url, headers={"User-Agent": UA})
-        with urllib.request.urlopen(req, timeout=20, context=ctx) as r:
-            body = r.read(1_000_000)
-            status, final = str(r.status), r.geturl()
-    except (OSError, ValueError) as e:  # URLError, TLS and socket errors are OSErrors
+        with urllib.request.urlopen(req, timeout=timeout, context=ctx) as r:
+            return str(r.status), r.geturl(), r.headers, r.read(limit)
+    except (OSError, ValueError, http.client.HTTPException) as e:  # URLError, TLS and socket errors are OSErrors
         LOG.debug("%s: %s", url, e)
         return None
+
+
+def try_fetch(url, ctx, path):
+    got = open_url(url, ctx)
+    if not got:
+        return None
+    status, final, _, body = got
     with open(path, "wb") as f:
         f.write(body)
     return status, final

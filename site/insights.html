@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insights · ugtech</title>
+<meta name="color-scheme" content="light">
+<meta name="description" content="What Uganda's tech companies build with: languages, website platforms, hosting, email providers, hiring and sectors, from open data.">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://agaba-ed.github.io/uganda-tech-companies/insights.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ugtech">
+<meta property="og:title" content="Insights · Tech Companies in Uganda">
+<meta property="og:description" content="Languages, platforms, hosting and hiring across Uganda's tech companies. Open data, updated weekly.">
+<meta property="og:url" content="https://agaba-ed.github.io/uganda-tech-companies/insights.html">
+<meta property="og:image" content="https://agaba-ed.github.io/uganda-tech-companies/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ugtech: the open directory of tech companies in Uganda">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Insights · Tech Companies in Uganda">
+<meta name="twitter:description" content="Languages, platforms, hosting and hiring across Uganda's tech companies.">
+<meta name="twitter:image" content="https://agaba-ed.github.io/uganda-tech-companies/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap"></noscript>
+<link rel="preload" as="fetch" href="data/insights.json" crossorigin>
+<style>
+  :root {
+    --bg: #ffffff; --surface: #ffffff; --ink: #0a0a0a; --muted: #6b7280; --line: #e5e7eb; --track: #f3f4f6;
+    --primary: #a16207; --bar: #b45309; --grad-a: #7a5800; --grad-b: #b8860b; --hover: #f9fafb;
+    --radius: 8px;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 15px/1.6 "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  a { color: inherit; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 16px; }
+  @media (min-width: 768px) { .container { padding: 0 32px; } }
+
+  header { position: sticky; top: 0; z-index: 10; background: color-mix(in srgb, var(--bg) 88%, transparent);
+           backdrop-filter: blur(10px); }
+  .nav { display: flex; align-items: center; gap: 32px; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; text-decoration: none; white-space: nowrap; }
+  .brand .wordmark { font-size: 17px; }
+  .brand .ug { color: var(--primary); }
+  .logo { width: 32px; height: 32px; display: block; }
+  .links { display: flex; gap: 18px; margin-left: auto; }
+  .links a { text-decoration: none; color: var(--muted); font-size: 15px; }
+  .links a:hover, .links a[aria-current] { color: var(--ink); }
+  .links .wide { display: none; }
+  @media (min-width: 900px) { .links { margin-left: 0; gap: 22px; } .links a { font-size: 16px; } .links .wide { display: inline; } }
+
+  .hero { text-align: center; padding: 40px 0 8px; }
+  h1 { font-size: clamp(30px, 4.6vw, 46px); line-height: 1.12; letter-spacing: -0.025em; font-weight: 700;
+       margin: 20px auto 0; max-width: 860px; }
+  .grad { background: linear-gradient(90deg, var(--grad-a), var(--grad-b)); -webkit-background-clip: text;
+          background-clip: text; color: transparent; }
+  .sub { color: var(--muted); font-size: clamp(15px, 1.8vw, 18px); margin: 16px auto 0; max-width: 640px; }
+
+  /* headline numbers */
+  .kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 36px 0 0; }
+  @media (min-width: 768px) { .kpis { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+  .kpi { border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; min-height: 104px; }
+  .kpi .v { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .kpi .l { color: var(--muted); font-size: 14px; margin-top: 6px; line-height: 1.35; }
+
+  /* chart cards */
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 16px; min-height: 120vh; align-items: start; }
+  @media (min-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .card { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; background: var(--surface); }
+  .card h2 { font-size: 18px; margin: 0; letter-spacing: -0.01em; }
+  .card .take { margin: 4px 0 14px; color: var(--muted); font-size: 14px; }
+  .card .take b { color: var(--ink); font-weight: 600; }
+  .bars { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .bar { display: grid; grid-template-columns: minmax(96px, 34%) minmax(0, 1fr) 72px; align-items: center; gap: 10px;
+         padding: 3px 4px; border-radius: 4px; font-size: 14px; }
+  .bar:hover, .bar:focus-visible { background: var(--hover); outline: none; }
+  .bar .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .bar .track { height: 10px; background: var(--track); border-radius: 0 4px 4px 0; }
+  .bar .fill { height: 100%; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 2px; }
+  .bar .val { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .bar .val b { color: var(--ink); font-weight: 600; }
+  @media (max-width: 560px) {
+    .bar { grid-template-columns: minmax(0, 1fr) auto; row-gap: 2px; padding: 4px; }
+    .bar .name { grid-column: 1 / -1; white-space: normal; }
+    .kpi:last-child { grid-column: 1 / -1; }
+  }
+  .note { margin: 12px 0 0; color: var(--muted); font-size: 13px; }
+  .empty { color: var(--muted); font-size: 14px; }
+
+  .tip { position: fixed; z-index: 20; pointer-events: none; background: var(--ink); color: #fff; font-size: 13px;
+         padding: 6px 10px; border-radius: 6px; white-space: nowrap; opacity: 0; transition: opacity .1s; }
+  .tip.on { opacity: 1; }
+
+  .method { margin-top: 40px; max-width: 760px; color: var(--muted); font-size: 14px; }
+  .method h2 { color: var(--ink); font-size: 18px; margin: 0 0 8px; }
+  .method ul { padding-left: 18px; margin: 8px 0 0; }
+
+  footer { border-top: 1px solid var(--line); margin-top: 64px; padding: 32px 0 48px; color: var(--muted); font-size: 14px; }
+  .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
+  footer a { color: var(--ink); }
+  a:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="./"><img class="logo" src="favicon.svg" alt="" width="32" height="32"><span class="wordmark"><span class="ug">ug</span>tech</span></a>
+    <nav class="links" aria-label="Main">
+      <a href="./">Directory</a>
+      <a href="insights.html" aria-current="page">Insights</a>
+      <a class="wide" href="https://github.com/Agaba-Ed/uganda-tech-companies/tree/main/data">Data</a>
+      <a class="wide" href="https://github.com/Agaba-Ed/uganda-tech-companies/blob/main/CONTRIBUTING.md">Contribute</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <h1>What <span class="grad">Uganda's tech companies</span> build with</h1>
+    <p class="sub" id="sub">Languages, website platforms, hosting, email and hiring, measured across the directory.</p>
+  </section>
+
+  <section class="kpis" id="kpis" aria-label="Headline numbers"></section>
+  <section class="grid" id="charts" aria-label="Charts"></section>
+
+  <section class="method">
+    <h2>How these are measured</h2>
+    <p>Every chart covers only the companies in the confident list for which that signal could be found, and says how many that is.</p>
+    <ul>
+      <li><b>Languages</b>: main languages of public GitHub repositories pushed in the last two years, by Uganda-based developers who name the company on their profile and by the company's own GitHub organisation. Counted once per company.</li>
+      <li><b>Website platform, frameworks, servers</b>: detected from each company's homepage HTML and response headers. This describes the public website, not necessarily the company's products.</li>
+      <li><b>Hosting</b>: the network that announces the website's IP address. "Behind Cloudflare" means the real host is hidden.</li>
+      <li><b>Email</b>: from the domain's MX records.</li>
+      <li><b>Hiring</b>: technologies named on the company's careers page.</li>
+    </ul>
+    <p>Download the numbers as <a href="data/insights.json">insights.json</a> or per company as <a href="data/tech.csv">tech.csv</a>.</p>
+  </section>
+</main>
+
+<div class="tip" id="tip" role="presentation"></div>
+
+<footer>
+  <div class="container foot">
+    <span>Data under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL</a>. Includes data © OpenStreetMap contributors.</span>
+    <span><a href="https://github.com/Agaba-Ed/uganda-tech-companies/issues/new?template=correct-or-remove.yml">Correct or remove a company</a></span>
+  </div>
+</footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = n => n.toLocaleString("en-US");
+const pct = (a, b) => {
+  const p = b ? (100 * a) / b : 0;
+  return a > 0 && p < 1 ? "<1%" : Math.round(p) + "%";
+};
+
+function kpis(d) {
+  const t = d.totals, h = d.hosting.where;
+  const inUg = (h.items.find(x => x.label === "In Uganda") || { count: 0 }).count;
+  const tiles = [
+    [fmt(t.companies), "tech companies in the confident list"],
+    [pct(t.with_website, t.companies), "have a website"],
+    [fmt(t.with_careers_page), "have a careers page"],
+    [fmt(t.on_github), `are named on ${fmt(t.github_profiles)} GitHub profiles`],
+    [pct(inUg, h.n), "of websites are hosted in Uganda"],
+  ];
+  $("kpis").innerHTML = tiles.map(([v, l]) => `<div class="kpi"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
+}
+
+// one card: a ranked list of horizontal bars, scaled to the largest value, with count and share of n
+function card({ title, take, block, unit, source }) {
+  if (!block || !block.items.length) return `<article class="card"><h2>${esc(title)}</h2><p class="empty">No data yet.</p></article>`;
+  const max = Math.max(...block.items.map(x => x.count));
+  const rows = block.items.map(x => {
+    const share = pct(x.count, block.n);
+    const tip = `${x.label}: ${fmt(x.count)} ${unit} (${share} of ${fmt(block.n)})`;
+    return `<li class="bar" tabindex="0" data-tip="${esc(tip)}" aria-label="${esc(tip)}">
+      <span class="name">${esc(x.label)}</span>
+      <span class="track"><span class="fill" style="display:block;width:${(100 * x.count) / max}%"></span></span>
+      <span class="val"><b>${fmt(x.count)}</b> · ${share}</span></li>`;
+  }).join("");
+  return `<article class="card"><h2>${esc(title)}</h2>${take ? `<p class="take">${take}</p>` : ""}
+    <ul class="bars">${rows}</ul><p class="note">Based on ${fmt(block.n)} ${unit}. ${source}</p></article>`;
+}
+
+function lead(block, text) {
+  const top = block && block.items[0];
+  return top ? text(`<b>${esc(top.label)}</b>`, pct(top.count, block.n)) : "";
+}
+
+function render(d) {
+  kpis(d);
+  $("sub").textContent = `Languages, website platforms, hosting, email and hiring across ${fmt(d.totals.companies)} companies. Updated ${d.generated_at}.`;
+  const L = d.github_languages, W = d.web;
+  const cards = [
+    { title: "Languages their developers use", block: L.by_company, unit: "companies",
+      take: lead(L.by_company, (x, p) => `${x} shows up at ${p} of companies with developers on GitHub.`), source: "Source: GitHub." },
+    { title: "What hiring companies ask for", block: d.careers_tech, unit: "careers pages",
+      take: lead(d.careers_tech, (x, p) => `${x} is named on ${p} of careers pages.`), source: "Source: company careers pages." },
+    { title: "Website platform", block: W.platform, unit: "websites",
+      take: lead(W.platform, (x, p) => `${x} runs ${p} of company websites.`), source: "Source: homepage HTML." },
+    { title: "Web frameworks", block: W.frameworks, unit: "websites",
+      take: lead(W.frameworks, (x, p) => `${x} is the most common, on ${p} of websites.`), source: "Source: homepage HTML and headers." },
+    { title: "Where websites are hosted", block: d.hosting.where, unit: "websites",
+      take: lead(d.hosting.where, (x, p) => `${x}: ${p} of websites.`), source: "Source: DNS and IP network registry." },
+    { title: "Hosting providers", block: d.hosting.hosts, unit: "websites",
+      take: lead(d.hosting.hosts, (x, p) => `${x} hosts ${p} of websites.`), source: "Source: DNS and IP network registry." },
+    { title: "Email providers", block: d.email, unit: "domains",
+      take: lead(d.email, (x, p) => `${x} handles email for ${p} of domains.`), source: "Source: MX records." },
+    { title: "Servers and CDNs", block: W.delivery, unit: "websites", take: "", source: "Source: response headers." },
+    { title: "Sectors", block: d.sectors, unit: "companies",
+      take: lead(d.sectors, (x, p) => `${x} is the largest sector, ${p} of classified companies.`), source: "A company can have two sectors." },
+    { title: "Cities", block: d.cities, unit: "companies",
+      take: lead(d.cities, (x, p) => `${x} is home to ${p} of companies with a known city.`), source: "Source: directories, maps and websites." },
+    { title: "Domains", block: d.domains, unit: "companies", take: "", source: "Source: company websites." },
+    { title: "Analytics and chat widgets", block: W.analytics, unit: "websites", take: "", source: "Source: homepage HTML." },
+  ];
+  $("charts").innerHTML = cards.map(card).join("");
+}
+
+// hover and keyboard tooltip for every bar
+const tip = $("tip");
+function show(el, x, y) {
+  tip.textContent = el.dataset.tip;
+  tip.classList.add("on");
+  const w = tip.offsetWidth;
+  tip.style.left = Math.min(Math.max(8, x - w / 2), innerWidth - w - 8) + "px";
+  tip.style.top = Math.max(8, y - 40) + "px";
+}
+$("charts").addEventListener("pointermove", e => {
+  const el = e.target.closest(".bar");
+  el ? show(el, e.clientX, e.clientY) : tip.classList.remove("on");
+});
+$("charts").addEventListener("pointerleave", () => tip.classList.remove("on"));
+$("charts").addEventListener("focusin", e => {
+  const el = e.target.closest(".bar");
+  if (el) { const r = el.getBoundingClientRect(); show(el, r.left + r.width / 2, r.top); }
+});
+$("charts").addEventListener("focusout", () => tip.classList.remove("on"));
+
+fetch("data/insights.json").then(r => r.json()).then(render).catch(() => {
+  $("charts").innerHTML = `<p class="empty">The insights could not be loaded. Try again later.</p>`;
+});
+</script>
+</body>
+</html>

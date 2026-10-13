@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ugtech · Tech Companies in Uganda</title>
 <meta name="color-scheme" content="light">
-<meta name="description" content="An open, searchable directory of 850+ technology companies in Uganda: fintechs, software houses, ISPs, banks' tech teams, AI startups and more.">
+<meta name="description" content="An open, searchable directory of 1,400+ technology companies in Uganda: fintechs, software houses, ISPs, banks' tech teams, AI startups and more.">
 <meta name="theme-color" content="#ffffff">
 <link rel="canonical" href="https://agaba-ed.github.io/uganda-tech-companies/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ugtech">
 <meta property="og:title" content="ugtech · Tech Companies in Uganda">
-<meta property="og:description" content="An open, searchable directory of 850+ technology companies in Uganda. Free to use, open data.">
+<meta property="og:description" content="An open, searchable directory of 1,400+ technology companies in Uganda. Free to use, open data.">
 <meta property="og:url" content="https://agaba-ed.github.io/uganda-tech-companies/">
 <meta property="og:image" content="https://agaba-ed.github.io/uganda-tech-companies/og.png">
 <meta property="og:image:width" content="1200">
@@ -22,7 +22,7 @@
 <meta property="og:image:alt" content="ugtech: the open directory of tech companies in Uganda">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ugtech · Tech Companies in Uganda">
-<meta name="twitter:description" content="An open, searchable directory of 850+ technology companies in Uganda.">
+<meta name="twitter:description" content="An open, searchable directory of 1,400+ technology companies in Uganda.">
 <meta name="twitter:image" content="https://agaba-ed.github.io/uganda-tech-companies/og.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,10 +56,11 @@
   .brand .wordmark { font-size: 17px; }
   .brand .ug { color: var(--primary); }
   .logo { width: 32px; height: 32px; display: block; }
-  .links { display: none; gap: 22px; }
-  .links a { text-decoration: none; color: var(--muted); font-size: 16px; }
+  .links { display: flex; gap: 18px; margin-left: auto; }
+  .links a { text-decoration: none; color: var(--muted); font-size: 15px; }
   .links a:hover { color: var(--ink); }
-  @media (min-width: 900px) { .links { display: flex; } }
+  .links .wide { display: none; }
+  @media (min-width: 900px) { .links { margin-left: 0; gap: 22px; } .links a { font-size: 16px; } .links .wide { display: inline; } }
 
   /* hero */
   .hero { text-align: center; padding: 48px 0 8px; }
@@ -154,9 +155,10 @@
     <a class="brand" href="./"><img class="logo" src="favicon.svg" alt="" width="32" height="32"><span class="wordmark"><span class="ug">ug</span>tech</span></a>
     <nav class="links" aria-label="Main">
       <a href="#directory">Directory</a>
-      <a href="https://github.com/Agaba-Ed/uganda-tech-companies/tree/main/data">Data</a>
-      <a href="https://github.com/Agaba-Ed/uganda-tech-companies/blob/main/CONTRIBUTING.md">Contribute</a>
-      <a href="https://github.com/Agaba-Ed/uganda-tech-companies#readme">About</a>
+      <a href="insights.html">Insights</a>
+      <a class="wide" href="https://github.com/Agaba-Ed/uganda-tech-companies/tree/main/data">Data</a>
+      <a class="wide" href="https://github.com/Agaba-Ed/uganda-tech-companies/blob/main/CONTRIBUTING.md">Contribute</a>
+      <a class="wide" href="https://github.com/Agaba-Ed/uganda-tech-companies#readme">About</a>
     </nav>
   </div>
 </header>

@@ -4,6 +4,7 @@ import os
 import re
 import sys
 
+from build_tech import TECH_FIELDS
 from common import CONFIDENCE, DATA, FIELDS, GENERIC_EMAIL, norm, read_csv
 
 URL = re.compile(r"^https?://[^\s/$.?#][^\s]*$", re.I)
@@ -49,9 +50,26 @@ def check_file(fname, seen_names, seen_domains):
     return errors
 
 
+def check_tech(names):
+    """tech.csv must have the expected header and only describe companies that are in the data files."""
+    path = os.path.join(DATA, "tech.csv")
+    if not os.path.exists(path):
+        return []
+    with open(path, encoding="utf-8") as f:
+        if f.readline().strip().split(",") != TECH_FIELDS:
+            return [f"tech.csv: header must be {','.join(TECH_FIELDS)}"]
+    return [
+        f"tech.csv:{i} ({r['name']}): not in companies.csv or unverified.csv"
+        for i, r in enumerate(read_csv(path), start=2)
+        if r["name"] not in names
+    ]
+
+
 def main():
     seen_names, seen_domains = {}, {}
     errors = [e for fname in ("companies.csv", "unverified.csv") for e in check_file(fname, seen_names, seen_domains)]
+    names = {r["name"] for fname in ("companies.csv", "unverified.csv") for r in read_csv(os.path.join(DATA, fname))}
+    errors += check_tech(names)
     for e in errors:
         print(e)
     print(f"{len(errors)} problem(s)")

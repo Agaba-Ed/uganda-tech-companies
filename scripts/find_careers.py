@@ -9,6 +9,7 @@ usage: python scripts/find_careers.py [--workers 32]
 
 import argparse
 import html
+import http.client
 import logging
 import os
 import re
@@ -48,7 +49,7 @@ def get(url):
             req = urllib.request.Request(url, headers={"User-Agent": UA})
             with urllib.request.urlopen(req, timeout=15, context=ctx) as r:
                 return r.geturl(), r.read(500_000).decode("utf-8", errors="ignore")
-        except (OSError, ValueError) as e:
+        except (OSError, ValueError, http.client.HTTPException) as e:
             LOG.debug("%s: %s", url, e)
     return None
 
