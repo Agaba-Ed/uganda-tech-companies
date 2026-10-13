@@ -32,7 +32,7 @@ One row per company with any signal, joined to the files above by `name`. Multip
 | `hosting_country` | Country the IP block is registered in (two-letter code). An approximation of where the site is served from |
 | `careers_tech` | Technologies named on the company's careers page |
 
-`insights.json` holds the aggregated numbers shown on the Insights page. Every breakdown has `n`, the number of
+`insights.json` holds aggregated numbers for reuse. Every breakdown has `n`, the number of
 companies in `companies.csv` it is based on, and `items`, a ranked list of `{label, count}`.
 
 ## Confidence

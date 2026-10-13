@@ -56,11 +56,10 @@
   .brand .wordmark { font-size: 17px; }
   .brand .ug { color: var(--primary); }
   .logo { width: 32px; height: 32px; display: block; }
-  .links { display: flex; gap: 18px; margin-left: auto; }
-  .links a { text-decoration: none; color: var(--muted); font-size: 15px; }
+  .links { display: none; gap: 22px; }
+  .links a { text-decoration: none; color: var(--muted); font-size: 16px; }
   .links a:hover { color: var(--ink); }
-  .links .wide { display: none; }
-  @media (min-width: 900px) { .links { margin-left: 0; gap: 22px; } .links a { font-size: 16px; } .links .wide { display: inline; } }
+  @media (min-width: 900px) { .links { display: flex; } }
 
   /* hero */
   .hero { text-align: center; padding: 48px 0 8px; }
@@ -155,10 +154,9 @@
     <a class="brand" href="./"><img class="logo" src="favicon.svg" alt="" width="32" height="32"><span class="wordmark"><span class="ug">ug</span>tech</span></a>
     <nav class="links" aria-label="Main">
       <a href="#directory">Directory</a>
-      <a href="insights.html">Insights</a>
-      <a class="wide" href="https://github.com/Agaba-Ed/uganda-tech-companies/tree/main/data">Data</a>
-      <a class="wide" href="https://github.com/Agaba-Ed/uganda-tech-companies/blob/main/CONTRIBUTING.md">Contribute</a>
-      <a class="wide" href="https://github.com/Agaba-Ed/uganda-tech-companies#readme">About</a>
+      <a href="https://github.com/Agaba-Ed/uganda-tech-companies/tree/main/data">Data</a>
+      <a href="https://github.com/Agaba-Ed/uganda-tech-companies/blob/main/CONTRIBUTING.md">Contribute</a>
+      <a href="https://github.com/Agaba-Ed/uganda-tech-companies#readme">About</a>
     </nav>
   </div>
 </header>

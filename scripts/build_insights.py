@@ -1,4 +1,4 @@
-"""Summarise the dataset into data/insights.json for the Insights page and anyone reusing the numbers.
+"""Summarise the dataset into data/insights.json for anyone reusing the numbers.
 
 Breakdowns cover the confident list (data/companies.csv). Each one carries `n`, the number of companies it
 is based on, so a reader can tell how much of the list the numbers describe.
