@@ -1,0 +1,638 @@
+{
+ "generated_at": "2026-10-13",
+ "totals": {
+  "companies": 1447,
+  "unverified": 5469,
+  "with_website": 1096,
+  "with_careers_page": 226,
+  "on_github": 490,
+  "github_profiles": 1070
+ },
+ "sectors": {
+  "n": 540,
+  "items": [
+   {
+    "label": "Hosting / Cloud / ISP / Telecom",
+    "count": 184
+   },
+   {
+    "label": "IT services / Systems integration",
+    "count": 173
+   },
+   {
+    "label": "Software house / Agency",
+    "count": 127
+   },
+   {
+    "label": "Fintech / Payments",
+    "count": 118
+   },
+   {
+    "label": "AI / Data",
+    "count": 56
+   },
+   {
+    "label": "Bank / Financial institution (in-house tech)",
+    "count": 32
+   },
+   {
+    "label": "Public sector (in-house tech)",
+    "count": 28
+   },
+   {
+    "label": "Cybersecurity",
+    "count": 23
+   },
+   {
+    "label": "Messaging / SMS / USSD",
+    "count": 20
+   },
+   {
+    "label": "E-commerce / Marketplace",
+    "count": 20
+   },
+   {
+    "label": "Tech hub / Training",
+    "count": 16
+   },
+   {
+    "label": "Edtech",
+    "count": 11
+   },
+   {
+    "label": "Energy / Mobility / IoT",
+    "count": 10
+   },
+   {
+    "label": "Agritech",
+    "count": 7
+   },
+   {
+    "label": "Healthtech",
+    "count": 6
+   },
+   {
+    "label": "Tech (general)",
+    "count": 3
+   }
+  ]
+ },
+ "cities": {
+  "n": 714,
+  "items": [
+   {
+    "label": "Kampala",
+    "count": 629
+   },
+   {
+    "label": "Entebbe",
+    "count": 16
+   },
+   {
+    "label": "Mukono",
+    "count": 9
+   },
+   {
+    "label": "Mbarara",
+    "count": 8
+   },
+   {
+    "label": "Jinja",
+    "count": 4
+   },
+   {
+    "label": "Mbale",
+    "count": 4
+   },
+   {
+    "label": "Masaka",
+    "count": 3
+   },
+   {
+    "label": "Ibanda",
+    "count": 2
+   },
+   {
+    "label": "Kabale",
+    "count": 2
+   },
+   {
+    "label": "Wakiso",
+    "count": 2
+   },
+   {
+    "label": "Nansana",
+    "count": 2
+   },
+   {
+    "label": "Yumbe",
+    "count": 2
+   }
+  ]
+ },
+ "domains": {
+  "n": 1447,
+  "items": [
+   {
+    "label": ".com",
+    "count": 597
+   },
+   {
+    "label": "No website",
+    "count": 351
+   },
+   {
+    "label": ".ug",
+    "count": 304
+   },
+   {
+    "label": "Other",
+    "count": 195
+   }
+  ]
+ },
+ "github_languages": {
+  "n": 367,
+  "by_company": {
+   "n": 367,
+   "items": [
+    {
+     "label": "HTML",
+     "count": 163
+    },
+    {
+     "label": "TypeScript",
+     "count": 158
+    },
+    {
+     "label": "JavaScript",
+     "count": 154
+    },
+    {
+     "label": "Python",
+     "count": 134
+    },
+    {
+     "label": "PHP",
+     "count": 67
+    },
+    {
+     "label": "CSS",
+     "count": 58
+    },
+    {
+     "label": "Jupyter Notebook",
+     "count": 51
+    },
+    {
+     "label": "Java",
+     "count": 43
+    },
+    {
+     "label": "Dart",
+     "count": 43
+    },
+    {
+     "label": "Go",
+     "count": 25
+    },
+    {
+     "label": "Shell",
+     "count": 22
+    },
+    {
+     "label": "Vue",
+     "count": 20
+    }
+   ]
+  },
+  "by_usage": {
+   "n": 367,
+   "items": [
+    {
+     "label": "TypeScript",
+     "count": 229
+    },
+    {
+     "label": "HTML",
+     "count": 223
+    },
+    {
+     "label": "JavaScript",
+     "count": 215
+    },
+    {
+     "label": "Python",
+     "count": 173
+    },
+    {
+     "label": "PHP",
+     "count": 85
+    },
+    {
+     "label": "CSS",
+     "count": 65
+    },
+    {
+     "label": "Jupyter Notebook",
+     "count": 64
+    },
+    {
+     "label": "Java",
+     "count": 49
+    },
+    {
+     "label": "Dart",
+     "count": 48
+    },
+    {
+     "label": "Go",
+     "count": 29
+    },
+    {
+     "label": "Vue",
+     "count": 24
+    },
+    {
+     "label": "Shell",
+     "count": 23
+    }
+   ]
+  }
+ },
+ "web": {
+  "n": 639,
+  "platform": {
+   "n": 639,
+   "items": [
+    {
+     "label": "Custom-built / other",
+     "count": 344
+    },
+    {
+     "label": "WordPress",
+     "count": 248
+    },
+    {
+     "label": "Drupal",
+     "count": 12
+    },
+    {
+     "label": "Wix",
+     "count": 11
+    },
+    {
+     "label": "Webflow",
+     "count": 10
+    },
+    {
+     "label": "Squarespace",
+     "count": 6
+    },
+    {
+     "label": "Joomla",
+     "count": 4
+    },
+    {
+     "label": "Shopify",
+     "count": 4
+    }
+   ]
+  },
+  "frameworks": {
+   "n": 639,
+   "items": [
+    {
+     "label": "Next.js",
+     "count": 60
+    },
+    {
+     "label": "React",
+     "count": 38
+    },
+    {
+     "label": "Vue",
+     "count": 8
+    },
+    {
+     "label": "Nuxt",
+     "count": 7
+    },
+    {
+     "label": "ASP.NET",
+     "count": 6
+    },
+    {
+     "label": "Django",
+     "count": 4
+    },
+    {
+     "label": "Express",
+     "count": 4
+    },
+    {
+     "label": "Angular",
+     "count": 2
+    },
+    {
+     "label": "Gatsby",
+     "count": 2
+    },
+    {
+     "label": "Laravel",
+     "count": 2
+    },
+    {
+     "label": "Svelte",
+     "count": 1
+    }
+   ]
+  },
+  "delivery": {
+   "n": 639,
+   "items": [
+    {
+     "label": "Apache",
+     "count": 152
+    },
+    {
+     "label": "Cloudflare",
+     "count": 140
+    },
+    {
+     "label": "nginx",
+     "count": 106
+    },
+    {
+     "label": "LiteSpeed",
+     "count": 102
+    },
+    {
+     "label": "Vercel",
+     "count": 37
+    },
+    {
+     "label": "Netlify",
+     "count": 11
+    },
+    {
+     "label": "Amazon CloudFront",
+     "count": 8
+    },
+    {
+     "label": "Microsoft IIS",
+     "count": 2
+    }
+   ]
+  },
+  "analytics": {
+   "n": 639,
+   "items": [
+    {
+     "label": "Google Analytics",
+     "count": 198
+    },
+    {
+     "label": "Google Tag Manager",
+     "count": 70
+    },
+    {
+     "label": "Meta Pixel",
+     "count": 27
+    },
+    {
+     "label": "Tawk.to",
+     "count": 23
+    },
+    {
+     "label": "Hotjar",
+     "count": 4
+    }
+   ]
+  }
+ },
+ "email": {
+  "n": 694,
+  "items": [
+   {
+    "label": "Own or hosting-provider mail",
+    "count": 365
+   },
+   {
+    "label": "Google Workspace",
+    "count": 127
+   },
+   {
+    "label": "Microsoft 365",
+    "count": 94
+   },
+   {
+    "label": "Zoho Mail",
+    "count": 62
+   },
+   {
+    "label": "Hostinger",
+    "count": 28
+   },
+   {
+    "label": "Titan",
+    "count": 7
+   },
+   {
+    "label": "Proofpoint",
+    "count": 5
+   },
+   {
+    "label": "Mimecast",
+    "count": 3
+   },
+   {
+    "label": "GoDaddy",
+    "count": 2
+   },
+   {
+    "label": "Transactional service",
+    "count": 1
+   }
+  ]
+ },
+ "hosting": {
+  "n": 802,
+  "where": {
+   "n": 802,
+   "items": [
+    {
+     "label": "Abroad",
+     "count": 640
+    },
+    {
+     "label": "Behind Cloudflare",
+     "count": 147
+    },
+    {
+     "label": "In Uganda",
+     "count": 15
+    }
+   ]
+  },
+  "hosts": {
+   "n": 802,
+   "items": [
+    {
+     "label": "Cloudflare",
+     "count": 147
+    },
+    {
+     "label": "Amazon (AWS)",
+     "count": 117
+    },
+    {
+     "label": "Hostinger",
+     "count": 44
+    },
+    {
+     "label": "Namecheap",
+     "count": 38
+    },
+    {
+     "label": "Google Cloud",
+     "count": 30
+    },
+    {
+     "label": "Contabo",
+     "count": 28
+    },
+    {
+     "label": "Hetzner",
+     "count": 27
+    },
+    {
+     "label": "Oracle Cloud",
+     "count": 27
+    },
+    {
+     "label": "DigitalOcean",
+     "count": 18
+    },
+    {
+     "label": "FranTech Solutions",
+     "count": 17
+    },
+    {
+     "label": "WHG Hosting Services Ltd",
+     "count": 16
+    },
+    {
+     "label": "Bluehost / Newfold",
+     "count": 15
+    }
+   ]
+  },
+  "countries_abroad": {
+   "n": 639,
+   "items": [
+    {
+     "label": "US",
+     "count": 429
+    },
+    {
+     "label": "DE",
+     "count": 81
+    },
+    {
+     "label": "GB",
+     "count": 38
+    },
+    {
+     "label": "AE",
+     "count": 14
+    },
+    {
+     "label": "CY",
+     "count": 11
+    },
+    {
+     "label": "IL",
+     "count": 10
+    },
+    {
+     "label": "LT",
+     "count": 7
+    },
+    {
+     "label": "CA",
+     "count": 7
+    },
+    {
+     "label": "NL",
+     "count": 6
+    },
+    {
+     "label": "ZA",
+     "count": 5
+    },
+    {
+     "label": "FR",
+     "count": 4
+    },
+    {
+     "label": "IN",
+     "count": 4
+    }
+   ]
+  }
+ },
+ "careers_tech": {
+  "n": 55,
+  "items": [
+   {
+    "label": "Machine learning",
+    "count": 13
+   },
+   {
+    "label": "Python",
+    "count": 12
+   },
+   {
+    "label": "PHP",
+    "count": 12
+   },
+   {
+    "label": "C#",
+    "count": 11
+   },
+   {
+    "label": "React",
+    "count": 10
+   },
+   {
+    "label": "JavaScript",
+    "count": 9
+   },
+   {
+    "label": "Node.js",
+    "count": 9
+   },
+   {
+    "label": "AWS",
+    "count": 9
+   },
+   {
+    "label": "Swift",
+    "count": 8
+   },
+   {
+    "label": "Java",
+    "count": 8
+   },
+   {
+    "label": "MySQL",
+    "count": 7
+   },
+   {
+    "label": "Linux",
+    "count": 7
+   }
+  ]
+ }
+}

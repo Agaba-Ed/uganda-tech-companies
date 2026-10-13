@@ -51,7 +51,7 @@ NON_TECH = re.compile(
 )
 SPAM = re.compile(
     r"illuminati|spell ?caster|love spell|\bwitch|black magic|sugar mummy|hack(er)? for hire|"
-    r"porn|escort|casino|betting|loan shark|fake (money|notes)|counterfeit",
+    r"porn|escort|casino|betting|loan shark|fake (money|notes)|counterfeit|maxwin|slot gacor|\bdepo\b|\btogel\b",
     re.I,
 )
 PUBLIC_SECTOR = re.compile(
@@ -172,7 +172,8 @@ def clean_row(row):
     row["careers_page"] = careers if re.match(r"https?://[^\s/$.?#][^\s]*$", careers, re.I) else ""
     desc = _PHONE.sub("", row.get("description", ""))
     desc = _EMAIL.sub("", desc)
-    row["description"] = re.sub(r"\s+", " ", desc).strip(" ,;|-")[:300]
+    desc = re.sub(r"\s+", " ", desc).strip(" ,;|-")[:300]
+    row["description"] = "" if re.search(r"lorem ipsum|dolor sit amet", desc, re.I) else desc  # template text
     parts = [SECTOR_ALIASES.get(x.strip().lower(), x.strip()) for x in row.get("sector", "").split(" · ") if x.strip()]
     sector = " · ".join(dict.fromkeys(parts))
     if PUBLIC_SECTOR.search(name + " " + row.get("domain", "")):
@@ -180,7 +181,62 @@ def clean_row(row):
     elif BANK.search(name) and not sector.startswith("Fintech"):
         sector = "Bank / Financial institution (in-house tech)"
     row["sector"] = sector
+    # "kampala" and "KAMPALA" are the same place; mixed-case names are left as written
+    places = [p.strip() for p in (row.get("location") or "").split(",") if p.strip()]
+    row["location"] = ", ".join(p.title() if p.isupper() or p.islower() else p for p in places)
+    row["stack_mentions"] = ", ".join(
+        dict.fromkeys(x.strip().lower() for x in (row.get("stack_mentions") or "").split(",") if x.strip())
+    )
     return row
+
+
+# Technologies looked for in job ads and careers pages, as display name -> pattern.
+TECH_TERMS = {
+    name: re.compile(pattern, re.I)
+    for name, pattern in {
+        "JavaScript": r"\bjavascript\b",
+        "TypeScript": r"\btypescript\b",
+        "React": r"\breact(\.js|js)?\b(?! native)",
+        "React Native": r"\breact native\b",
+        "Angular": r"\bangular\b",
+        "Vue": r"\bvue(\.js|js)?\b",
+        "Next.js": r"\bnext\.?js\b",
+        "Node.js": r"\bnode(\.js|js)?\b",
+        "Python": r"\bpython\b",
+        "Django": r"\bdjango\b",
+        "Flask": r"\bflask\b",
+        "FastAPI": r"\bfastapi\b",
+        "PHP": r"\bphp\b",
+        "Laravel": r"\blaravel\b",
+        "Java": r"\bjava\b(?!script)",
+        "Spring": r"\bspring( boot)?\b",
+        "Kotlin": r"\bkotlin\b",
+        "Swift": r"\bswift(ui)?\b",
+        "Flutter": r"\bflutter\b",
+        "Dart": r"\bdart\b",
+        "C#": r"(?<!\w)c#|(?<![\w/])\.net\b|\basp\.net\b",
+        "Go": r"\bgolang\b|\bgo (developer|engineer)\b",
+        "Ruby": r"ruby on rails|\bruby\b(?= (developer|engineer|programming))|\brails\b",
+        "SQL": r"\bsql\b",
+        "PostgreSQL": r"\bpostgres(ql)?\b",
+        "MySQL": r"\bmysql\b",
+        "MongoDB": r"\bmongo(db)?\b",
+        "AWS": r"\baws\b|amazon web services",
+        "Azure": r"\bazure\b",
+        "Google Cloud": r"\bgcp\b|google cloud",
+        "Docker": r"\bdocker\b",
+        "Kubernetes": r"\bkubernetes\b|\bk8s\b",
+        "Linux": r"\blinux\b",
+        "Odoo": r"\bodoo\b",
+        "Salesforce": r"\bsalesforce\b",
+        "Power BI": r"\bpower ?bi\b",
+        "Machine learning": r"machine learning|\bml engineer\b|\bdata scien",
+    }.items()
+}
+
+
+def tech_terms(text):
+    return [name for name, rx in TECH_TERMS.items() if rx.search(text)]
 
 
 # Developers sometimes put their own name in GitHub's "company" field. Entries that come only from

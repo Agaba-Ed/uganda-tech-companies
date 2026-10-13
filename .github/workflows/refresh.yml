@@ -1,7 +1,8 @@
 name: Weekly refresh
 
 # Re-harvests Common Crawl, GitHub, OpenStreetMap and the yellow.ug directory, classifies new websites,
-# merges state/curated.csv, looks for careers pages and opens a pull request with the changes. Nothing is merged automatically.
+# merges state/curated.csv, looks for careers pages, collects technology signals (tech.csv, insights.json)
+# and opens a pull request with the changes. Nothing is merged automatically.
 on:
   schedule:
     - cron: "0 4 * * 1"  # Mondays 04:00 UTC (07:00 Kampala)
@@ -46,6 +47,15 @@ jobs:
         run: |
           python scripts/update.py
           python scripts/find_careers.py
+      - name: Collect technology signals
+        run: |
+          python scripts/fingerprint.py --workers 32
+          python scripts/dns_signals.py --resolver 8.8.8.8
+        continue-on-error: true
+      - name: Build tech.csv and insights.json
+        run: |
+          python scripts/build_tech.py
+          python scripts/build_insights.py
           python scripts/validate.py
 
       - uses: peter-evans/create-pull-request@v7
@@ -57,4 +67,5 @@ jobs:
           body-path: build/summary.md
           add-paths: |
             data/*.csv
+            data/insights.json
             state/seen_domains.txt

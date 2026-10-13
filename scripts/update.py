@@ -64,13 +64,16 @@ def dedupe(companies, unverified):
 
 class Dataset:
     def __init__(self):
-        self.companies, self.unverified = dedupe(
-            read_csv(os.path.join(DATA, "companies.csv")), read_csv(os.path.join(DATA, "unverified.csv"))
-        )
         self.removed = {norm(x) for x in lines(os.path.join(STATE, "removed.txt")) if x and not x.startswith("#")}
+        # existing rows are cleaned again so new privacy and quality rules apply to them too
+        self.companies, self.unverified = dedupe(*(self.recleaned(f) for f in ("companies.csv", "unverified.csv")))
         self.by_name = {norm(r["name"]): r for r in self.companies + self.unverified}
         self.by_domain = {r["domain"]: r for r in self.companies + self.unverified if r["domain"]}
         self.added = []
+
+    def recleaned(self, fname):
+        rows = (clean_row(r) for r in read_csv(os.path.join(DATA, fname)))
+        return [r for r in rows if r and not self.is_removed(r["name"], r["domain"])]
 
     def find(self, name, domain=""):
         return self.by_name.get(norm(name)) or (self.by_domain.get(domain) if domain else None)
@@ -114,6 +117,7 @@ class Dataset:
                         "domain": d,
                         "sector": r["sector"],
                         "description": r.get("description", ""),
+                        "location": r.get("location", ""),
                         "confidence": "high",
                         "sources": source,
                     },
@@ -128,8 +132,9 @@ class Dataset:
                 existing["website"], existing["domain"] = r["website"], d
             if r["sector"]:
                 existing["sector"] = r["sector"]
-            if r.get("description"):
-                existing["description"] = r["description"]
+            for field in ("description", "location"):
+                if r.get(field):
+                    existing[field] = r[field]
             existing["sources"] = "; ".join(x for x in existing["sources"].split("; ") if not x.startswith("Curated"))
             add_source(existing, source)
 
