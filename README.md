@@ -9,8 +9,8 @@ in-house tech teams of banks and public bodies.
 
 | File | Rows | What it is |
 |---|---|---|
-| `data/companies.csv` | 1,432 | High and medium confidence: strong tech website, several developers, or found in 2+ sources |
-| `data/unverified.csv` | 5,414 | Low-confidence candidates |
+| `data/companies.csv` | 1,447 | High and medium confidence: strong tech website, several developers, or found in 2+ sources |
+| `data/unverified.csv` | 5,463 | Low-confidence candidates |
 
 ## Contributing
 
