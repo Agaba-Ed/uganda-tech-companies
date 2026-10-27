@@ -1,35 +1,35 @@
 {
- "generated_at": "2026-10-19",
+ "generated_at": "2026-10-26",
  "totals": {
-  "companies": 1448,
-  "unverified": 5474,
-  "with_website": 1098,
-  "with_careers_page": 228,
-  "on_github": 490,
-  "github_profiles": 1070
+  "companies": 1457,
+  "unverified": 5487,
+  "with_website": 1107,
+  "with_careers_page": 229,
+  "on_github": 493,
+  "github_profiles": 1075
  },
  "sectors": {
-  "n": 542,
+  "n": 551,
   "items": [
    {
     "label": "Hosting / Cloud / ISP / Telecom",
-    "count": 185
+    "count": 189
    },
    {
     "label": "IT services / Systems integration",
-    "count": 173
+    "count": 176
    },
    {
     "label": "Software house / Agency",
-    "count": 128
+    "count": 131
    },
    {
     "label": "Fintech / Payments",
-    "count": 119
+    "count": 122
    },
    {
     "label": "AI / Data",
-    "count": 56
+    "count": 57
    },
    {
     "label": "Bank / Financial institution (in-house tech)",
@@ -41,19 +41,19 @@
    },
    {
     "label": "Cybersecurity",
-    "count": 23
+    "count": 24
+   },
+   {
+    "label": "E-commerce / Marketplace",
+    "count": 21
    },
    {
     "label": "Messaging / SMS / USSD",
     "count": 20
    },
    {
-    "label": "E-commerce / Marketplace",
-    "count": 20
-   },
-   {
     "label": "Tech hub / Training",
-    "count": 16
+    "count": 17
    },
    {
     "label": "Edtech",
@@ -131,7 +131,7 @@
   ]
  },
  "domains": {
-  "n": 1448,
+  "n": 1457,
   "items": [
    {
     "label": ".com",
@@ -143,42 +143,42 @@
    },
    {
     "label": ".ug",
-    "count": 304
+    "count": 310
    },
    {
     "label": "Other",
-    "count": 196
+    "count": 199
    }
   ]
  },
  "github_languages": {
-  "n": 367,
+  "n": 364,
   "by_company": {
-   "n": 367,
+   "n": 364,
    "items": [
     {
      "label": "HTML",
-     "count": 164
+     "count": 163
     },
     {
      "label": "TypeScript",
-     "count": 158
+     "count": 155
     },
     {
      "label": "JavaScript",
-     "count": 151
+     "count": 150
     },
     {
      "label": "Python",
-     "count": 133
+     "count": 132
     },
     {
      "label": "PHP",
-     "count": 66
+     "count": 65
     },
     {
      "label": "CSS",
-     "count": 57
+     "count": 58
     },
     {
      "label": "Jupyter Notebook",
@@ -186,11 +186,11 @@
     },
     {
      "label": "Java",
-     "count": 42
+     "count": 41
     },
     {
      "label": "Dart",
-     "count": 42
+     "count": 39
     },
     {
      "label": "Go",
@@ -207,19 +207,19 @@
    ]
   },
   "by_usage": {
-   "n": 367,
+   "n": 364,
    "items": [
     {
      "label": "TypeScript",
-     "count": 230
+     "count": 227
     },
     {
      "label": "HTML",
-     "count": 223
+     "count": 224
     },
     {
      "label": "JavaScript",
-     "count": 212
+     "count": 210
     },
     {
      "label": "Python",
@@ -227,14 +227,14 @@
     },
     {
      "label": "PHP",
-     "count": 86
-    },
-    {
-     "label": "Jupyter Notebook",
-     "count": 63
+     "count": 84
     },
     {
      "label": "CSS",
+     "count": 64
+    },
+    {
+     "label": "Jupyter Notebook",
      "count": 63
     },
     {
@@ -243,47 +243,47 @@
     },
     {
      "label": "Dart",
-     "count": 48
+     "count": 44
     },
     {
      "label": "Go",
-     "count": 31
-    },
-    {
-     "label": "Vue",
-     "count": 24
+     "count": 30
     },
     {
      "label": "Shell",
+     "count": 25
+    },
+    {
+     "label": "Vue",
      "count": 24
     }
    ]
   }
  },
  "web": {
-  "n": 636,
+  "n": 634,
   "platform": {
-   "n": 636,
+   "n": 634,
    "items": [
     {
      "label": "Custom-built / other",
-     "count": 346
+     "count": 349
     },
     {
      "label": "WordPress",
-     "count": 243
-    },
-    {
-     "label": "Drupal",
-     "count": 12
+     "count": 240
     },
     {
      "label": "Wix",
      "count": 11
     },
     {
-     "label": "Webflow",
+     "label": "Drupal",
      "count": 10
+    },
+    {
+     "label": "Webflow",
+     "count": 9
     },
     {
      "label": "Squarespace",
@@ -291,7 +291,7 @@
     },
     {
      "label": "Joomla",
-     "count": 4
+     "count": 5
     },
     {
      "label": "Shopify",
@@ -300,27 +300,27 @@
    ]
   },
   "frameworks": {
-   "n": 636,
+   "n": 634,
    "items": [
     {
      "label": "Next.js",
-     "count": 61
+     "count": 60
     },
     {
      "label": "React",
-     "count": 37
-    },
-    {
-     "label": "ASP.NET",
-     "count": 10
+     "count": 39
     },
     {
      "label": "Nuxt",
      "count": 7
     },
     {
-     "label": "Vue",
+     "label": "ASP.NET",
      "count": 7
+    },
+    {
+     "label": "Vue",
+     "count": 6
     },
     {
      "label": "Django",
@@ -349,31 +349,31 @@
    ]
   },
   "delivery": {
-   "n": 636,
+   "n": 634,
    "items": [
     {
      "label": "Apache",
-     "count": 153
+     "count": 152
     },
     {
      "label": "Cloudflare",
-     "count": 143
+     "count": 144
     },
     {
      "label": "nginx",
-     "count": 102
+     "count": 107
     },
     {
      "label": "LiteSpeed",
-     "count": 98
+     "count": 100
     },
     {
      "label": "Vercel",
-     "count": 37
+     "count": 38
     },
     {
      "label": "Netlify",
-     "count": 11
+     "count": 10
     },
     {
      "label": "Amazon CloudFront",
@@ -386,23 +386,23 @@
    ]
   },
   "analytics": {
-   "n": 636,
+   "n": 634,
    "items": [
     {
      "label": "Google Analytics",
-     "count": 201
+     "count": 202
     },
     {
      "label": "Google Tag Manager",
-     "count": 69
+     "count": 70
     },
     {
      "label": "Meta Pixel",
-     "count": 27
+     "count": 25
     },
     {
      "label": "Tawk.to",
-     "count": 25
+     "count": 24
     },
     {
      "label": "Hotjar",
@@ -412,31 +412,31 @@
   }
  },
  "email": {
-  "n": 561,
+  "n": 584,
   "items": [
    {
     "label": "Own or hosting-provider mail",
-    "count": 293
+    "count": 300
    },
    {
     "label": "Google Workspace",
-    "count": 99
+    "count": 106
    },
    {
     "label": "Microsoft 365",
-    "count": 75
+    "count": 78
    },
    {
     "label": "Zoho Mail",
-    "count": 53
+    "count": 56
    },
    {
     "label": "Hostinger",
-    "count": 25
+    "count": 26
    },
    {
     "label": "Titan",
-    "count": 5
+    "count": 8
    },
    {
     "label": "Proofpoint",
@@ -448,7 +448,7 @@
    },
    {
     "label": "GoDaddy",
-    "count": 2
+    "count": 1
    },
    {
     "label": "Transactional service",
@@ -457,38 +457,38 @@
   ]
  },
  "hosting": {
-  "n": 636,
+  "n": 637,
   "where": {
-   "n": 636,
+   "n": 637,
    "items": [
     {
      "label": "Abroad",
-     "count": 508
+     "count": 515
     },
     {
      "label": "Behind Cloudflare",
-     "count": 114
+     "count": 109
     },
     {
      "label": "In Uganda",
-     "count": 14
+     "count": 13
     }
    ]
   },
   "hosts": {
-   "n": 636,
+   "n": 637,
    "items": [
     {
      "label": "Cloudflare",
-     "count": 114
+     "count": 109
     },
     {
      "label": "Amazon (AWS)",
-     "count": 101
+     "count": 100
     },
     {
      "label": "Hostinger",
-     "count": 37
+     "count": 36
     },
     {
      "label": "Namecheap",
@@ -499,10 +499,6 @@
      "count": 24
     },
     {
-     "label": "Oracle Cloud",
-     "count": 22
-    },
-    {
      "label": "Contabo",
      "count": 21
     },
@@ -511,57 +507,57 @@
      "count": 19
     },
     {
+     "label": "Oracle Cloud",
+     "count": 18
+    },
+    {
      "label": "WHG Hosting Services Ltd",
+     "count": 14
+    },
+    {
+     "label": "Fastly",
      "count": 13
     },
     {
      "label": "Liquid",
-     "count": 13
+     "count": 12
     },
     {
-     "label": "FranTech Solutions",
-     "count": 11
-    },
-    {
-     "label": "Fastly",
-     "count": 11
+     "label": "DigitalOcean",
+     "count": 12
     }
    ]
   },
   "countries_abroad": {
-   "n": 507,
+   "n": 514,
    "items": [
     {
      "label": "US",
-     "count": 344
+     "count": 346
     },
     {
      "label": "DE",
-     "count": 63
+     "count": 60
     },
     {
      "label": "GB",
-     "count": 31
+     "count": 35
+    },
+    {
+     "label": "LT",
+     "count": 9
     },
     {
      "label": "NL",
+     "count": 8
+    },
+    {
+     "label": "UA",
      "count": 7
     },
     {
      "label": "IL",
      "count": 6
-    },
-    {
-     "label": "UA",
-     "count": 6
-    },
-    {
-     "label": "LT",
-     "count": 6
-    },
-    {
-     "label": "CY",
-     "count": 5
     },
     {
      "label": "CA",
@@ -576,7 +572,11 @@
      "count": 4
     },
     {
-     "label": "AE",
+     "label": "AU",
+     "count": 4
+    },
+    {
+     "label": "CY",
      "count": 4
     }
    ]
@@ -587,11 +587,7 @@
   "items": [
    {
     "label": "Machine learning",
-    "count": 11
-   },
-   {
-    "label": "React",
-    "count": 10
+    "count": 12
    },
    {
     "label": "Python",
@@ -602,7 +598,7 @@
     "count": 10
    },
    {
-    "label": "Node.js",
+    "label": "React",
     "count": 9
    },
    {
@@ -614,16 +610,20 @@
     "count": 9
    },
    {
-    "label": "JavaScript",
-    "count": 7
+    "label": "Node.js",
+    "count": 8
    },
    {
     "label": "Swift",
     "count": 7
    },
    {
-    "label": "Linux",
+    "label": "Java",
     "count": 7
+   },
+   {
+    "label": "JavaScript",
+    "count": 6
    },
    {
     "label": "MySQL",
