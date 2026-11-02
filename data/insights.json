@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-10-26",
+ "generated_at": "2026-11-02",
  "totals": {
-  "companies": 1457,
-  "unverified": 5487,
-  "with_website": 1107,
-  "with_careers_page": 229,
-  "on_github": 493,
-  "github_profiles": 1075
+  "companies": 1458,
+  "unverified": 5499,
+  "with_website": 1108,
+  "with_careers_page": 230,
+  "on_github": 494,
+  "github_profiles": 1076
  },
  "sectors": {
-  "n": 551,
+  "n": 552,
   "items": [
    {
     "label": "Hosting / Cloud / ISP / Telecom",
@@ -21,7 +21,7 @@
    },
    {
     "label": "Software house / Agency",
-    "count": 131
+    "count": 132
    },
    {
     "label": "Fintech / Payments",
@@ -131,7 +131,7 @@
   ]
  },
  "domains": {
-  "n": 1457,
+  "n": 1458,
   "items": [
    {
     "label": ".com",
@@ -147,14 +147,14 @@
    },
    {
     "label": "Other",
-    "count": 199
+    "count": 200
    }
   ]
  },
  "github_languages": {
-  "n": 364,
+  "n": 366,
   "by_company": {
-   "n": 364,
+   "n": 366,
    "items": [
     {
      "label": "HTML",
@@ -162,11 +162,11 @@
     },
     {
      "label": "TypeScript",
-     "count": 155
+     "count": 154
     },
     {
      "label": "JavaScript",
-     "count": 150
+     "count": 151
     },
     {
      "label": "Python",
@@ -174,7 +174,7 @@
     },
     {
      "label": "PHP",
-     "count": 65
+     "count": 66
     },
     {
      "label": "CSS",
@@ -182,11 +182,11 @@
     },
     {
      "label": "Jupyter Notebook",
-     "count": 50
+     "count": 51
     },
     {
      "label": "Java",
-     "count": 41
+     "count": 43
     },
     {
      "label": "Dart",
@@ -198,7 +198,7 @@
     },
     {
      "label": "Shell",
-     "count": 22
+     "count": 21
     },
     {
      "label": "Vue",
@@ -207,71 +207,71 @@
    ]
   },
   "by_usage": {
-   "n": 364,
+   "n": 366,
    "items": [
     {
      "label": "TypeScript",
-     "count": 227
+     "count": 226
     },
     {
      "label": "HTML",
-     "count": 224
+     "count": 222
     },
     {
      "label": "JavaScript",
-     "count": 210
+     "count": 211
     },
     {
      "label": "Python",
-     "count": 174
+     "count": 176
     },
     {
      "label": "PHP",
      "count": 84
     },
     {
+     "label": "Jupyter Notebook",
+     "count": 65
+    },
+    {
      "label": "CSS",
      "count": 64
     },
     {
-     "label": "Jupyter Notebook",
-     "count": 63
-    },
-    {
      "label": "Java",
-     "count": 48
+     "count": 50
     },
     {
      "label": "Dart",
-     "count": 44
+     "count": 43
     },
     {
      "label": "Go",
      "count": 30
     },
     {
-     "label": "Shell",
-     "count": 25
+     "label": "Vue",
+     "count": 24
     },
     {
-     "label": "Vue",
+     "label": "Shell",
      "count": 24
     }
    ]
   }
  },
  "web": {
-  "n": 634,
+  "n": 642,
   "platform": {
-   "n": 634,
+   "n": 642,
    "items": [
     {
      "label": "Custom-built / other",
-     "count": 349
+     "count": 353
     },
     {
      "label": "WordPress",
-     "count": 240
+     "count": 242
     },
     {
      "label": "Wix",
@@ -279,11 +279,11 @@
     },
     {
      "label": "Drupal",
-     "count": 10
+     "count": 11
     },
     {
      "label": "Webflow",
-     "count": 9
+     "count": 10
     },
     {
      "label": "Squarespace",
@@ -300,22 +300,22 @@
    ]
   },
   "frameworks": {
-   "n": 634,
+   "n": 642,
    "items": [
     {
      "label": "Next.js",
-     "count": 60
+     "count": 62
     },
     {
      "label": "React",
      "count": 39
     },
     {
-     "label": "Nuxt",
-     "count": 7
+     "label": "ASP.NET",
+     "count": 9
     },
     {
-     "label": "ASP.NET",
+     "label": "Nuxt",
      "count": 7
     },
     {
@@ -349,19 +349,19 @@
    ]
   },
   "delivery": {
-   "n": 634,
+   "n": 642,
    "items": [
     {
-     "label": "Apache",
-     "count": 152
+     "label": "Cloudflare",
+     "count": 150
     },
     {
-     "label": "Cloudflare",
-     "count": 144
+     "label": "Apache",
+     "count": 150
     },
     {
      "label": "nginx",
-     "count": 107
+     "count": 106
     },
     {
      "label": "LiteSpeed",
@@ -369,7 +369,7 @@
     },
     {
      "label": "Vercel",
-     "count": 38
+     "count": 37
     },
     {
      "label": "Netlify",
@@ -377,7 +377,7 @@
     },
     {
      "label": "Amazon CloudFront",
-     "count": 8
+     "count": 7
     },
     {
      "label": "Microsoft IIS",
@@ -386,23 +386,23 @@
    ]
   },
   "analytics": {
-   "n": 634,
+   "n": 642,
    "items": [
     {
      "label": "Google Analytics",
-     "count": 202
+     "count": 210
     },
     {
      "label": "Google Tag Manager",
      "count": 70
     },
     {
-     "label": "Meta Pixel",
-     "count": 25
+     "label": "Tawk.to",
+     "count": 26
     },
     {
-     "label": "Tawk.to",
-     "count": 24
+     "label": "Meta Pixel",
+     "count": 25
     },
     {
      "label": "Hotjar",
@@ -412,27 +412,27 @@
   }
  },
  "email": {
-  "n": 584,
+  "n": 706,
   "items": [
    {
     "label": "Own or hosting-provider mail",
-    "count": 300
+    "count": 368
    },
    {
     "label": "Google Workspace",
-    "count": 106
+    "count": 128
    },
    {
     "label": "Microsoft 365",
-    "count": 78
+    "count": 94
    },
    {
     "label": "Zoho Mail",
-    "count": 56
+    "count": 67
    },
    {
     "label": "Hostinger",
-    "count": 26
+    "count": 30
    },
    {
     "label": "Titan",
@@ -448,7 +448,7 @@
    },
    {
     "label": "GoDaddy",
-    "count": 1
+    "count": 2
    },
    {
     "label": "Transactional service",
@@ -457,91 +457,95 @@
   ]
  },
  "hosting": {
-  "n": 637,
+  "n": 813,
   "where": {
-   "n": 637,
+   "n": 813,
    "items": [
     {
      "label": "Abroad",
-     "count": 515
+     "count": 644
     },
     {
      "label": "Behind Cloudflare",
-     "count": 109
+     "count": 154
     },
     {
      "label": "In Uganda",
-     "count": 13
+     "count": 15
     }
    ]
   },
   "hosts": {
-   "n": 637,
+   "n": 813,
    "items": [
     {
      "label": "Cloudflare",
-     "count": 109
+     "count": 154
     },
     {
      "label": "Amazon (AWS)",
-     "count": 100
+     "count": 117
     },
     {
      "label": "Hostinger",
-     "count": 36
+     "count": 45
     },
     {
      "label": "Namecheap",
-     "count": 29
-    },
-    {
-     "label": "Google Cloud",
-     "count": 24
+     "count": 41
     },
     {
      "label": "Contabo",
-     "count": 21
+     "count": 31
     },
     {
-     "label": "Hetzner",
-     "count": 19
+     "label": "Google Cloud",
+     "count": 30
     },
     {
      "label": "Oracle Cloud",
+     "count": 29
+    },
+    {
+     "label": "Hetzner",
+     "count": 25
+    },
+    {
+     "label": "DigitalOcean",
      "count": 18
     },
     {
      "label": "WHG Hosting Services Ltd",
-     "count": 14
+     "count": 16
+    },
+    {
+     "label": "FranTech Solutions",
+     "count": 16
     },
     {
      "label": "Fastly",
-     "count": 13
-    },
-    {
-     "label": "Liquid",
-     "count": 12
-    },
-    {
-     "label": "DigitalOcean",
-     "count": 12
+     "count": 15
     }
    ]
   },
   "countries_abroad": {
-   "n": 514,
+   "n": 643,
    "items": [
     {
      "label": "US",
-     "count": 346
+     "count": 436
     },
     {
      "label": "DE",
-     "count": 60
+     "count": 78
     },
     {
      "label": "GB",
-     "count": 35
+     "count": 43
+    },
+    {
+     "label": "IL",
+     "count": 10
     },
     {
      "label": "LT",
@@ -556,11 +560,15 @@
      "count": 7
     },
     {
-     "label": "IL",
-     "count": 6
+     "label": "CA",
+     "count": 7
     },
     {
-     "label": "CA",
+     "label": "ZA",
+     "count": 5
+    },
+    {
+     "label": "CY",
      "count": 5
     },
     {
@@ -570,39 +578,35 @@
     {
      "label": "IN",
      "count": 4
-    },
-    {
-     "label": "AU",
-     "count": 4
-    },
-    {
-     "label": "CY",
-     "count": 4
     }
    ]
   }
  },
  "careers_tech": {
-  "n": 51,
+  "n": 55,
   "items": [
    {
     "label": "Machine learning",
-    "count": 12
-   },
-   {
-    "label": "Python",
-    "count": 10
+    "count": 14
    },
    {
     "label": "PHP",
-    "count": 10
+    "count": 11
    },
    {
     "label": "React",
-    "count": 9
+    "count": 10
    },
    {
     "label": "AWS",
+    "count": 10
+   },
+   {
+    "label": "Node.js",
+    "count": 9
+   },
+   {
+    "label": "Python",
     "count": 9
    },
    {
@@ -610,7 +614,7 @@
     "count": 9
    },
    {
-    "label": "Node.js",
+    "label": "JavaScript",
     "count": 8
    },
    {
@@ -618,20 +622,16 @@
     "count": 7
    },
    {
-    "label": "Java",
+    "label": "Google Cloud",
     "count": 7
    },
    {
-    "label": "JavaScript",
-    "count": 6
+    "label": "Linux",
+    "count": 7
    },
    {
-    "label": "MySQL",
-    "count": 6
-   },
-   {
-    "label": "Google Cloud",
-    "count": 6
+    "label": "Java",
+    "count": 7
    }
   ]
  }
